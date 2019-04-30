@@ -26,30 +26,30 @@ if( $configName != 'default' && isset($config[$configName]) ) {
 	$conf = $config['default'];
 }
 
-// Load Kaltura Client
-require_once('client/KalturaClient.php');
+// Load Vidiun Client
+require_once('client/VidiunClient.php');
 
 try {
 	// Return a Client
 	$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? "https" : "http";
-	$config = new KalturaConfiguration( $conf['partner_id'] );
+	$config = new VidiunConfiguration( $conf['partner_id'] );
 	$config->serviceUrl = $protocol . '://' . $conf['host'];
-	$client = new KalturaClient( $config );
+	$client = new VidiunClient( $config );
 
-	// Create & Set KS
-	if( isset($conf['ks']) ) {
-		$ks = $conf['ks'];
+	// Create & Set VS
+	if( isset($conf['vs']) ) {
+		$vs = $conf['vs'];
 	} else {
 		if( isset( $save ) ) {
-			$sessionType = KalturaSessionType::ADMIN;
+			$sessionType = VidiunSessionType::ADMIN;
 			$sessionSecret = $conf['adminsecret'];
 		} else {
-			$sessionType = KalturaSessionType::USER;
+			$sessionType = VidiunSessionType::USER;
 			$sessionSecret = $conf['usersecret'];
 		}
-		$ks = $client->session->start($sessionSecret, $conf['user_id'], $sessionType, $conf['partner_id'], null, null);
+		$vs = $client->session->start($sessionSecret, $conf['user_id'], $sessionType, $conf['partner_id'], null, null);
 	}
-	$client->setKs($ks);
+	$client->setVs($vs);
 } catch( Exception $e ){
 	$error = '<h1>Error</h1>' . $e->getMessage();
 	die($error);

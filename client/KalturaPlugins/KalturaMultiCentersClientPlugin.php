@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaFileSyncImportJobData extends KalturaJobData
+class VidiunFileSyncImportJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -37,22 +37,22 @@ class KalturaFileSyncImportJobData extends KalturaJobData
 }
 
 
-class KalturaFilesyncImportBatchService extends KalturaServiceBase
+class VidiunFilesyncImportBatchService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function getExclusiveFileSyncImportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveFileSyncImportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveFileSyncImportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveFileSyncImportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -61,45 +61,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveFileSyncImportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveFileSyncImportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveFileSyncImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveFileSyncImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveFileSyncImportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveFileSyncImportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveFileSyncImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveFileSyncImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneFileSyncImportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneFileSyncImportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneFileSyncImportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneFileSyncImportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -108,15 +108,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveImportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveImportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveImportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveImportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -125,45 +125,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -172,15 +172,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -189,72 +189,72 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function addBulkUploadResult(KalturaBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
+	function addBulkUploadResult(VidiunBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadResult", $bulkUploadResult->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadResult", $bulkUploadResult->toParams());
 		if ($pluginDataArray !== null)
 			foreach($pluginDataArray as $index => $obj)
 			{
-				$this->client->addParam($kparams, "pluginDataArray:$index", $obj->toParams());
+				$this->client->addParam($vparams, "pluginDataArray:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "addBulkUploadResult", $kparams);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "addBulkUploadResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function getBulkUploadLastResult($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getBulkUploadLastResult", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getBulkUploadLastResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function countBulkUploadEntries($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "countBulkUploadEntries", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "countBulkUploadEntries", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -265,9 +265,9 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 
 	function updateBulkUploadResults($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateBulkUploadResults", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateBulkUploadResults", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -276,15 +276,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -293,15 +293,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertProfileJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertProfileJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertProfileJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertProfileJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -310,80 +310,80 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job, array $flavorsData = null)
+	function updateExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job, array $flavorsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
 		if ($flavorsData !== null)
 			foreach($flavorsData as $index => $obj)
 			{
-				$this->client->addParam($kparams, "flavorsData:$index", $obj->toParams());
+				$this->client->addParam($vparams, "flavorsData:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertCollectionJob", $kparams);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertCollectionJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -392,15 +392,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -409,15 +409,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -426,60 +426,60 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJobSubType($id, KalturaExclusiveLockKey $lockKey, $subType)
+	function updateExclusiveConvertJobSubType($id, VidiunExclusiveLockKey $lockKey, $subType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "subType", $subType);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertJobSubType", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "subType", $subType);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveConvertJobSubType", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusivePostConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusivePostConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusivePostConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusivePostConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -488,45 +488,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveCaptureThumbJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveCaptureThumbJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveCaptureThumbJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveCaptureThumbJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -535,45 +535,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveExtractMediaJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveExtractMediaJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveExtractMediaJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveExtractMediaJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -582,58 +582,58 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function addMediaInfo(KalturaMediaInfo $mediaInfo)
+	function addMediaInfo(VidiunMediaInfo $mediaInfo)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "mediaInfo", $mediaInfo->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "addMediaInfo", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "mediaInfo", $mediaInfo->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "addMediaInfo", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaInfo");
+		$this->client->validateObjectType($resultObject, "VidiunMediaInfo");
 		return $resultObject;
 	}
 
-	function freeExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageExportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageExportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveStorageExportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveStorageExportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -642,45 +642,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveStorageDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveStorageDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -689,92 +689,92 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveNotificationJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveNotificationJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveNotificationJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveNotificationJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchGetExclusiveNotificationJobsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunBatchGetExclusiveNotificationJobsResponse");
 		return $resultObject;
 	}
 
-	function updateExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveMailJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveMailJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveMailJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveMailJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -783,45 +783,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -830,15 +830,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -847,45 +847,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -894,15 +894,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -911,45 +911,45 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -958,15 +958,15 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -975,43 +975,43 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function resetJobExecutionAttempts($id, KalturaExclusiveLockKey $lockKey, $jobType)
+	function resetJobExecutionAttempts($id, VidiunExclusiveLockKey $lockKey, $jobType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "resetJobExecutionAttempts", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "resetJobExecutionAttempts", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1020,27 +1020,27 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function freeExclusiveJob($id, KalturaExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
+	function freeExclusiveJob($id, VidiunExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "freeExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getQueueSize(KalturaWorkerQueueFilter $workerQueueFilter)
+	function getQueueSize(VidiunWorkerQueueFilter $workerQueueFilter)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "workerQueueFilter", $workerQueueFilter->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getQueueSize", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "workerQueueFilter", $workerQueueFilter->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getQueueSize", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1049,16 +1049,16 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1067,16 +1067,16 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDone(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveAlmostDone(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDone", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "getExclusiveAlmostDone", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1085,25 +1085,25 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "updateExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
 	function cleanExclusiveJobs()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "cleanExclusiveJobs", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "cleanExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1114,10 +1114,10 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 
 	function logConversion($flavorAssetId, $data)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "data", $data);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "logConversion", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "data", $data);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "logConversion", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1128,48 +1128,48 @@ class KalturaFilesyncImportBatchService extends KalturaServiceBase
 
 	function checkFileExists($localPath, $size)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "localPath", $localPath);
-		$this->client->addParam($kparams, "size", $size);
-		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "checkFileExists", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "localPath", $localPath);
+		$this->client->addParam($vparams, "size", $size);
+		$this->client->queueServiceActionCall("multicenters_filesyncimportbatch", "checkFileExists", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFileExistsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFileExistsResponse");
 		return $resultObject;
 	}
 }
-class KalturaMultiCentersClientPlugin extends KalturaClientPlugin
+class VidiunMultiCentersClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaMultiCentersClientPlugin
+	 * @var VidiunMultiCentersClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaFileSyncImportBatchService
+	 * @var VidiunFileSyncImportBatchService
 	 */
 	public $fileSyncImportBatch = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->fileSyncImportBatch = new KalturaFileSyncImportBatchService($client);
+		$this->fileSyncImportBatch = new VidiunFileSyncImportBatchService($client);
 	}
 
 	/**
-	 * @return KalturaMultiCentersClientPlugin
+	 * @return VidiunMultiCentersClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaMultiCentersClientPlugin($client);
+			self::$instance = new VidiunMultiCentersClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

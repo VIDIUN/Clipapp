@@ -1,14 +1,14 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaMetadataObjectType
+class VidiunMetadataObjectType
 {
 	const ENTRY = 1;
 }
 
-class KalturaMetadataOrderBy
+class VidiunMetadataOrderBy
 {
 	const METADATA_PROFILE_VERSION_ASC = "+metadataProfileVersion";
 	const METADATA_PROFILE_VERSION_DESC = "-metadataProfileVersion";
@@ -20,13 +20,13 @@ class KalturaMetadataOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
-class KalturaMetadataProfileCreateMode
+class VidiunMetadataProfileCreateMode
 {
 	const API = 1;
-	const KMC = 2;
+	const VMC = 2;
 }
 
-class KalturaMetadataProfileOrderBy
+class VidiunMetadataProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
@@ -34,21 +34,21 @@ class KalturaMetadataProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
-class KalturaMetadataProfileStatus
+class VidiunMetadataProfileStatus
 {
 	const ACTIVE = 1;
 	const DEPRECATED = 2;
 	const TRANSFORMING = 3;
 }
 
-class KalturaMetadataStatus
+class VidiunMetadataStatus
 {
 	const VALID = 1;
 	const INVALID = 2;
 	const DELETED = 3;
 }
 
-abstract class KalturaMetadataBaseFilter extends KalturaFilter
+abstract class VidiunMetadataBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -88,7 +88,7 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectTypeEqual = null;
 
@@ -158,7 +158,7 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataStatus
+	 * @var VidiunMetadataStatus
 	 */
 	public $statusEqual = null;
 
@@ -172,12 +172,12 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 
 }
 
-class KalturaMetadataFilter extends KalturaMetadataBaseFilter
+class VidiunMetadataFilter extends VidiunMetadataBaseFilter
 {
 
 }
 
-class KalturaMetadata extends KalturaObjectBase
+class VidiunMetadata extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -214,7 +214,7 @@ class KalturaMetadata extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 * @readonly
 	 */
 	public $metadataObjectType = null;
@@ -254,7 +254,7 @@ class KalturaMetadata extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataStatus
+	 * @var VidiunMetadataStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -270,12 +270,12 @@ class KalturaMetadata extends KalturaObjectBase
 
 }
 
-class KalturaMetadataListResponse extends KalturaObjectBase
+class VidiunMetadataListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadata
+	 * @var array of VidiunMetadata
 	 * @readonly
 	 */
 	public $objects;
@@ -291,7 +291,7 @@ class KalturaMetadataListResponse extends KalturaObjectBase
 
 }
 
-abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
+abstract class VidiunMetadataProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -310,7 +310,7 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectTypeEqual = null;
 
@@ -373,7 +373,7 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileStatus
+	 * @var VidiunMetadataProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -387,12 +387,12 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 
 }
 
-class KalturaMetadataProfileFilter extends KalturaMetadataProfileBaseFilter
+class VidiunMetadataProfileFilter extends VidiunMetadataProfileBaseFilter
 {
 
 }
 
-class KalturaMetadataProfile extends KalturaObjectBase
+class VidiunMetadataProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -413,7 +413,7 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectType = null;
 
@@ -465,7 +465,7 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileStatus
+	 * @var VidiunMetadataProfileStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -489,19 +489,19 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileCreateMode
+	 * @var VidiunMetadataProfileCreateMode
 	 */
 	public $createMode = null;
 
 
 }
 
-class KalturaMetadataProfileListResponse extends KalturaObjectBase
+class VidiunMetadataProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadataProfile
+	 * @var array of VidiunMetadataProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -517,7 +517,7 @@ class KalturaMetadataProfileListResponse extends KalturaObjectBase
 
 }
 
-class KalturaMetadataProfileField extends KalturaObjectBase
+class VidiunMetadataProfileField extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -554,12 +554,12 @@ class KalturaMetadataProfileField extends KalturaObjectBase
 
 }
 
-class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
+class VidiunMetadataProfileFieldListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadataProfileField
+	 * @var array of VidiunMetadataProfileField
 	 * @readonly
 	 */
 	public $objects;
@@ -575,12 +575,12 @@ class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
 
 }
 
-class KalturaTransformMetadataResponse extends KalturaObjectBase
+class VidiunTransformMetadataResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadata
+	 * @var array of VidiunMetadata
 	 * @readonly
 	 */
 	public $objects;
@@ -604,7 +604,7 @@ class KalturaTransformMetadataResponse extends KalturaObjectBase
 
 }
 
-class KalturaUpgradeMetadataResponse extends KalturaObjectBase
+class VidiunUpgradeMetadataResponse extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -625,7 +625,7 @@ class KalturaUpgradeMetadataResponse extends KalturaObjectBase
 
 }
 
-class KalturaMetadataSearchItem extends KalturaSearchOperator
+class VidiunMetadataSearchItem extends VidiunSearchOperator
 {
 	/**
 	 * 
@@ -637,7 +637,7 @@ class KalturaMetadataSearchItem extends KalturaSearchOperator
 
 }
 
-class KalturaImportMetadataJobData extends KalturaJobData
+class VidiunImportMetadataJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -663,7 +663,7 @@ class KalturaImportMetadataJobData extends KalturaJobData
 
 }
 
-class KalturaTransformMetadataJobData extends KalturaJobData
+class VidiunTransformMetadataJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -704,99 +704,99 @@ class KalturaTransformMetadataJobData extends KalturaJobData
 }
 
 
-class KalturaMetadataService extends KalturaServiceBase
+class VidiunMetadataService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaMetadataFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunMetadataFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadata", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadata", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataListResponse");
 		return $resultObject;
 	}
 
 	function add($metadataProfileId, $objectType, $objectId, $xmlData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "xmlData", $xmlData);
-		$this->client->queueServiceActionCall("metadata_metadata", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "xmlData", $xmlData);
+		$this->client->queueServiceActionCall("metadata_metadata", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function addFromFile($metadataProfileId, $objectType, $objectId, $xmlFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xmlFile", $xmlFile);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xmlFile", $xmlFile);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function addFromUrl($metadataProfileId, $objectType, $objectId, $url)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "url", $url);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromUrl", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "url", $url);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function addFromBulk($metadataProfileId, $objectType, $objectId, $url)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "url", $url);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromBulk", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "url", $url);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromBulk", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -807,9 +807,9 @@ class KalturaMetadataService extends KalturaServiceBase
 
 	function invalidate($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "invalidate", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "invalidate", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -820,128 +820,128 @@ class KalturaMetadataService extends KalturaServiceBase
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function update($id, $xmlData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "xmlData", $xmlData);
-		$this->client->queueServiceActionCall("metadata_metadata", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "xmlData", $xmlData);
+		$this->client->queueServiceActionCall("metadata_metadata", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function updateFromFile($id, $xmlFile = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xmlFile", $xmlFile);
-		$this->client->queueServiceActionCall("metadata_metadata", "updateFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xmlFile", $xmlFile);
+		$this->client->queueServiceActionCall("metadata_metadata", "updateFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	function serve($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall('metadata_metadata', 'serve', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall('metadata_metadata', 'serve', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 }
 
-class KalturaMetadataProfileService extends KalturaServiceBase
+class VidiunMetadataProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaMetadataProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunMetadataProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfileListResponse");
 		return $resultObject;
 	}
 
 	function listFields($metadataProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "listFields", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "listFields", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfileFieldListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfileFieldListResponse");
 		return $resultObject;
 	}
 
-	function add(KalturaMetadataProfile $metadataProfile, $xsdData, $viewsData = null)
+	function add(VidiunMetadataProfile $metadataProfile, $xsdData, $viewsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$this->client->addParam($kparams, "xsdData", $xsdData);
-		$this->client->addParam($kparams, "viewsData", $viewsData);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$this->client->addParam($vparams, "xsdData", $xsdData);
+		$this->client->addParam($vparams, "viewsData", $viewsData);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
-	function addFromFile(KalturaMetadataProfile $metadataProfile, $xsdFile, $viewsFile = null)
+	function addFromFile(VidiunMetadataProfile $metadataProfile, $xsdFile, $viewsFile = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsdFile", $xsdFile);
-		$this->client->addParam($kfiles, "viewsFile", $viewsFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "addFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsdFile", $xsdFile);
+		$this->client->addParam($vfiles, "viewsFile", $viewsFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "addFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -952,112 +952,112 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
-	function update($id, KalturaMetadataProfile $metadataProfile, $xsdData = null, $viewsData = null)
+	function update($id, VidiunMetadataProfile $metadataProfile, $xsdData = null, $viewsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$this->client->addParam($kparams, "xsdData", $xsdData);
-		$this->client->addParam($kparams, "viewsData", $viewsData);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$this->client->addParam($vparams, "xsdData", $xsdData);
+		$this->client->addParam($vparams, "viewsData", $viewsData);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	function revert($id, $toVersion)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "toVersion", $toVersion);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "revert", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "toVersion", $toVersion);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "revert", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	function updateDefinitionFromFile($id, $xsdFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsdFile", $xsdFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateDefinitionFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsdFile", $xsdFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateDefinitionFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	function updateViewsFromFile($id, $viewsFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "viewsFile", $viewsFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateViewsFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "viewsFile", $viewsFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateViewsFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	function serve($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall('metadata_metadataprofile', 'serve', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall('metadata_metadataprofile', 'serve', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 
 	function serveView($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall('metadata_metadataprofile', 'serveView', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall('metadata_metadataprofile', 'serveView', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 }
 
-class KalturaMetadataBatchService extends KalturaServiceBase
+class VidiunMetadataBatchService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function getExclusiveImportMetadataJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveImportMetadataJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveImportMetadataJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveImportMetadataJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1066,45 +1066,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveImportMetadataJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveImportMetadataJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveImportMetadataJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveImportMetadataJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveImportMetadataJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveImportMetadataJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveImportMetadataJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveImportMetadataJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveTransformMetadataJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveTransformMetadataJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveTransformMetadataJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveTransformMetadataJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1113,79 +1113,79 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveTransformMetadataJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveTransformMetadataJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveTransformMetadataJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveTransformMetadataJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveTransformMetadataJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveTransformMetadataJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveTransformMetadataJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveTransformMetadataJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getTransformMetadataObjects($metadataProfileId, $srcVersion, $destVersion, KalturaFilterPager $pager = null)
+	function getTransformMetadataObjects($metadataProfileId, $srcVersion, $destVersion, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "srcVersion", $srcVersion);
-		$this->client->addParam($kparams, "destVersion", $destVersion);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "srcVersion", $srcVersion);
+		$this->client->addParam($vparams, "destVersion", $destVersion);
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getTransformMetadataObjects", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getTransformMetadataObjects", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaTransformMetadataResponse");
+		$this->client->validateObjectType($resultObject, "VidiunTransformMetadataResponse");
 		return $resultObject;
 	}
 
-	function upgradeMetadataObjects($metadataProfileId, $srcVersion, $destVersion, KalturaFilterPager $pager = null)
+	function upgradeMetadataObjects($metadataProfileId, $srcVersion, $destVersion, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "srcVersion", $srcVersion);
-		$this->client->addParam($kparams, "destVersion", $destVersion);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "srcVersion", $srcVersion);
+		$this->client->addParam($vparams, "destVersion", $destVersion);
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "upgradeMetadataObjects", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "upgradeMetadataObjects", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUpgradeMetadataResponse");
+		$this->client->validateObjectType($resultObject, "VidiunUpgradeMetadataResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveImportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveImportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveImportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveImportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1194,45 +1194,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1241,15 +1241,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1258,72 +1258,72 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function addBulkUploadResult(KalturaBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
+	function addBulkUploadResult(VidiunBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadResult", $bulkUploadResult->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadResult", $bulkUploadResult->toParams());
 		if ($pluginDataArray !== null)
 			foreach($pluginDataArray as $index => $obj)
 			{
-				$this->client->addParam($kparams, "pluginDataArray:$index", $obj->toParams());
+				$this->client->addParam($vparams, "pluginDataArray:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "addBulkUploadResult", $kparams);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "addBulkUploadResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function getBulkUploadLastResult($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getBulkUploadLastResult", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getBulkUploadLastResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function countBulkUploadEntries($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "countBulkUploadEntries", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "countBulkUploadEntries", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1334,9 +1334,9 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 
 	function updateBulkUploadResults($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateBulkUploadResults", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateBulkUploadResults", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1345,15 +1345,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1362,15 +1362,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertProfileJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertProfileJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertProfileJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertProfileJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1379,80 +1379,80 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job, array $flavorsData = null)
+	function updateExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job, array $flavorsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
 		if ($flavorsData !== null)
 			foreach($flavorsData as $index => $obj)
 			{
-				$this->client->addParam($kparams, "flavorsData:$index", $obj->toParams());
+				$this->client->addParam($vparams, "flavorsData:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertCollectionJob", $kparams);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertCollectionJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1461,15 +1461,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1478,15 +1478,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1495,60 +1495,60 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJobSubType($id, KalturaExclusiveLockKey $lockKey, $subType)
+	function updateExclusiveConvertJobSubType($id, VidiunExclusiveLockKey $lockKey, $subType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "subType", $subType);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertJobSubType", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "subType", $subType);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveConvertJobSubType", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusivePostConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusivePostConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusivePostConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusivePostConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1557,45 +1557,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveCaptureThumbJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveCaptureThumbJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveCaptureThumbJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveCaptureThumbJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1604,45 +1604,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveExtractMediaJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveExtractMediaJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveExtractMediaJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveExtractMediaJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1651,58 +1651,58 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function addMediaInfo(KalturaMediaInfo $mediaInfo)
+	function addMediaInfo(VidiunMediaInfo $mediaInfo)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "mediaInfo", $mediaInfo->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "addMediaInfo", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "mediaInfo", $mediaInfo->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "addMediaInfo", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaInfo");
+		$this->client->validateObjectType($resultObject, "VidiunMediaInfo");
 		return $resultObject;
 	}
 
-	function freeExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageExportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageExportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveStorageExportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveStorageExportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1711,45 +1711,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveStorageDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveStorageDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1758,92 +1758,92 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveNotificationJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveNotificationJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveNotificationJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveNotificationJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchGetExclusiveNotificationJobsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunBatchGetExclusiveNotificationJobsResponse");
 		return $resultObject;
 	}
 
-	function updateExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveMailJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveMailJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveMailJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveMailJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1852,45 +1852,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1899,15 +1899,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1916,45 +1916,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1963,15 +1963,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1980,45 +1980,45 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2027,15 +2027,15 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2044,43 +2044,43 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function resetJobExecutionAttempts($id, KalturaExclusiveLockKey $lockKey, $jobType)
+	function resetJobExecutionAttempts($id, VidiunExclusiveLockKey $lockKey, $jobType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "resetJobExecutionAttempts", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "resetJobExecutionAttempts", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2089,27 +2089,27 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function freeExclusiveJob($id, KalturaExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
+	function freeExclusiveJob($id, VidiunExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "freeExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getQueueSize(KalturaWorkerQueueFilter $workerQueueFilter)
+	function getQueueSize(VidiunWorkerQueueFilter $workerQueueFilter)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "workerQueueFilter", $workerQueueFilter->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getQueueSize", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "workerQueueFilter", $workerQueueFilter->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getQueueSize", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2118,16 +2118,16 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2136,16 +2136,16 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDone(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveAlmostDone(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDone", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "getExclusiveAlmostDone", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2154,25 +2154,25 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "updateExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
 	function cleanExclusiveJobs()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "cleanExclusiveJobs", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "cleanExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2183,10 +2183,10 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 
 	function logConversion($flavorAssetId, $data)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "data", $data);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "logConversion", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "data", $data);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "logConversion", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -2197,60 +2197,60 @@ class KalturaMetadataBatchService extends KalturaServiceBase
 
 	function checkFileExists($localPath, $size)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "localPath", $localPath);
-		$this->client->addParam($kparams, "size", $size);
-		$this->client->queueServiceActionCall("metadata_metadatabatch", "checkFileExists", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "localPath", $localPath);
+		$this->client->addParam($vparams, "size", $size);
+		$this->client->queueServiceActionCall("metadata_metadatabatch", "checkFileExists", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFileExistsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFileExistsResponse");
 		return $resultObject;
 	}
 }
-class KalturaMetadataClientPlugin extends KalturaClientPlugin
+class VidiunMetadataClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaMetadataClientPlugin
+	 * @var VidiunMetadataClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaMetadataService
+	 * @var VidiunMetadataService
 	 */
 	public $metadata = null;
 
 	/**
-	 * @var KalturaMetadataProfileService
+	 * @var VidiunMetadataProfileService
 	 */
 	public $metadataProfile = null;
 
 	/**
-	 * @var KalturaMetadataBatchService
+	 * @var VidiunMetadataBatchService
 	 */
 	public $metadataBatch = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->metadata = new KalturaMetadataService($client);
-		$this->metadataProfile = new KalturaMetadataProfileService($client);
-		$this->metadataBatch = new KalturaMetadataBatchService($client);
+		$this->metadata = new VidiunMetadataService($client);
+		$this->metadataProfile = new VidiunMetadataProfileService($client);
+		$this->metadataBatch = new VidiunMetadataBatchService($client);
 	}
 
 	/**
-	 * @return KalturaMetadataClientPlugin
+	 * @return VidiunMetadataClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaMetadataClientPlugin($client);
+			self::$instance = new VidiunMetadataClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

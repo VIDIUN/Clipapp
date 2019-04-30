@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaFileSyncOrderBy
+class VidiunFileSyncOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
@@ -17,7 +17,7 @@ class KalturaFileSyncOrderBy
 	const FILE_SIZE_DESC = "-fileSize";
 }
 
-class KalturaFileSyncStatus
+class VidiunFileSyncStatus
 {
 	const ERROR = -1;
 	const PENDING = 1;
@@ -26,14 +26,14 @@ class KalturaFileSyncStatus
 	const PURGED = 4;
 }
 
-class KalturaFileSyncType
+class VidiunFileSyncType
 {
 	const FILE = 1;
 	const LINK = 2;
 	const URL = 3;
 }
 
-abstract class KalturaFileSyncBaseFilter extends KalturaFilter
+abstract class VidiunFileSyncBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -45,7 +45,7 @@ abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncObjectType
+	 * @var VidiunFileSyncObjectType
 	 */
 	public $fileObjectTypeEqual = null;
 
@@ -178,7 +178,7 @@ abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncStatus
+	 * @var VidiunFileSyncStatus
 	 */
 	public $statusEqual = null;
 
@@ -192,7 +192,7 @@ abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncType
+	 * @var VidiunFileSyncType
 	 */
 	public $fileTypeEqual = null;
 
@@ -241,12 +241,12 @@ abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 
 }
 
-class KalturaFileSyncFilter extends KalturaFileSyncBaseFilter
+class VidiunFileSyncFilter extends VidiunFileSyncBaseFilter
 {
 
 }
 
-class KalturaFileSync extends KalturaObjectBase
+class VidiunFileSync extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -267,7 +267,7 @@ class KalturaFileSync extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncObjectType
+	 * @var VidiunFileSyncObjectType
 	 * @readonly
 	 */
 	public $fileObjectType = null;
@@ -347,7 +347,7 @@ class KalturaFileSync extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncStatus
+	 * @var VidiunFileSyncStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -355,7 +355,7 @@ class KalturaFileSync extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaFileSyncType
+	 * @var VidiunFileSyncType
 	 * @readonly
 	 */
 	public $fileType = null;
@@ -435,12 +435,12 @@ class KalturaFileSync extends KalturaObjectBase
 
 }
 
-class KalturaFileSyncListResponse extends KalturaObjectBase
+class VidiunFileSyncListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFileSync
+	 * @var array of VidiunFileSync
 	 * @readonly
 	 */
 	public $objects;
@@ -457,74 +457,74 @@ class KalturaFileSyncListResponse extends KalturaObjectBase
 }
 
 
-class KalturaFileSyncService extends KalturaServiceBase
+class VidiunFileSyncService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaFileSyncFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunFileSyncFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("filesync_filesync", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("filesync_filesync", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFileSyncListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFileSyncListResponse");
 		return $resultObject;
 	}
 
 	function sync($fileSyncId, $fileData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "fileSyncId", $fileSyncId);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "fileData", $fileData);
-		$this->client->queueServiceActionCall("filesync_filesync", "sync", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "fileSyncId", $fileSyncId);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "fileData", $fileData);
+		$this->client->queueServiceActionCall("filesync_filesync", "sync", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFileSync");
+		$this->client->validateObjectType($resultObject, "VidiunFileSync");
 		return $resultObject;
 	}
 }
-class KalturaFileSyncClientPlugin extends KalturaClientPlugin
+class VidiunFileSyncClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaFileSyncClientPlugin
+	 * @var VidiunFileSyncClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaFileSyncService
+	 * @var VidiunFileSyncService
 	 */
 	public $fileSync = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->fileSync = new KalturaFileSyncService($client);
+		$this->fileSync = new VidiunFileSyncService($client);
 	}
 
 	/**
-	 * @return KalturaFileSyncClientPlugin
+	 * @return VidiunFileSyncClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaFileSyncClientPlugin($client);
+			self::$instance = new VidiunFileSyncClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{
