@@ -26,7 +26,7 @@ $config['default']['usersecret'] = '';
 
 /*
  * Admin Secret - used for saving the clip/trim
- * You can get it from KMC > Settings > Integration Settings
+ * You can get it from VMC > Settings > Integration Settings
  */
 $config['default']['adminsecret'] = '';
 
@@ -70,8 +70,8 @@ $config['default']['show_embed'] = true;
 /* Use HTML5 Embed code: true/false */
 $config['default']['html5_embed'] = true;
 
-/* KDP UIConf ID */
-$config['default']['kdp_uiconf_id'] = 0;
+/* VDP UIConf ID */
+$config['default']['vdp_uiconf_id'] = 0;
 
 /* Clipper UIConf ID */
 $config['default']['clipper_uiconf_id'] = 0;

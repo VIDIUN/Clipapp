@@ -13,10 +13,10 @@ $html5Url = $protocol . '://' . $conf['host'] . '/p/' . $conf['partner_id'] ."/s
 $vdpUrl = $protocol . '://' . $conf['host'] . '/vwidget/wid/_' . $conf['partner_id'] . '/uiconf_id/' . $conf['vdp_uiconf_id'] . '/entry_id/' . $entryId;
 
 // Create Clipper Url & Flashvars
-$clipperUrl = $protocol . '://' . $conf['host'] . '/kgeneric/ui_conf_id/' . $conf['clipper_uiconf_id'];
-//$clipperUrl = "http://localhost/Clipper/bin-debug/KClip.swf?host=http://www.kaltura.com&uiConfId=21224322&cdnHost=cdnbakmi.kaltura.com";
+$clipperUrl = $protocol . '://' . $conf['host'] . '/vgeneric/ui_conf_id/' . $conf['clipper_uiconf_id'];
+//$clipperUrl = "http://localhost/Clipper/bin-debug/VClip.swf?host=http://www.vidiun.com&uiConfId=21224322&cdnHost=cdnbakmi.vidiun.com";
 $clipperFlashvars = '&entry_id=' . $entryId . '&partner_id=' . $conf['partner_id'] . '&host=' . $conf['host'];
-$clipperFlashvars .= '&ks=' . $ks . '&show_add_delete_buttons=false&state=clippingState&jsReadyFunc=clipperReady';
+$clipperFlashvars .= '&vs=' . $vs . '&show_add_delete_buttons=false&state=clippingState&jsReadyFunc=clipperReady';
 $clipperFlashvars .= '&max_allowed_rows=1&show_control_bar=true&show_message_box=false&protocol=' . $protocol . '://';
 
 if(!$entryId)
@@ -85,8 +85,8 @@ $clipAppConfig = array(
 				<param name="allowScriptAccess" value="always" />
 				<param name="wmode" value="window" />
 				<param name="bgcolor" value="#000000" />
-				<param name="flashVars" value="ks=<?php echo $ks;?>&streamerType=auto&autoPlay=true" />
-				<param name="movie" value="<?php echo $kdpUrl; ?>" />
+				<param name="flashVars" value="vs=<?php echo $vs;?>&streamerType=auto&autoPlay=true" />
+				<param name="movie" value="<?php echo $vdpUrl; ?>" />
 			</object>
 			<div id="form" class="form clearfix">
 				<div id="newclip"><div class="disable"></div><img id="loader" src="images/loader.gif" alt="<?php echo t('Saving'); ?>..." /><?php echo $form_title; ?></div>

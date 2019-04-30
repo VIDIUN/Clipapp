@@ -24,24 +24,24 @@ clipApp.init = function( options ) {
 };
 
 var jsCallbackReady = function( videoId ) {
-	clipApp.kdp = $("#" + videoId ).get(0);
-	clipApp.kdp.addJsListener("mediaReady", "clipApp.player.doFirstPlay");
-	clipApp.kdp.addJsListener("playerPlayed", "clipApp.player.playerPlaying");
-	clipApp.kdp.addJsListener("playerPaused", "clipApp.player.playerPaused");
-	clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
-	clipApp.kdp.addJsListener("durationChange", "clipApp.player.durationChange");
+	clipApp.vdp = $("#" + videoId ).get(0);
+	clipApp.vdp.addJsListener("mediaReady", "clipApp.player.doFirstPlay");
+	clipApp.vdp.addJsListener("playerPlayed", "clipApp.player.playerPlaying");
+	clipApp.vdp.addJsListener("playerPaused", "clipApp.player.playerPaused");
+	clipApp.vdp.addJsListener("doSeek", "clipApp.onSeek");
+	clipApp.vdp.addJsListener("durationChange", "clipApp.player.durationChange");
 
 };
 
 var clipperReady = function() {
-	clipApp.kClip = $("#clipper").get(0);
-	clipApp.kClip.addJsListener("clipStartChanged", "clipApp.updateStartTime");
-	clipApp.kClip.addJsListener("clipEndChanged", "clipApp.updateEndTime");
-	clipApp.kClip.addJsListener("entryReady", "clipApp.enableAddClip");
-	clipApp.kClip.addJsListener("clipAdded", "clipApp.clipAdded");
-	clipApp.kClip.addJsListener("clipperError", "clipApp.showError");
-	clipApp.kClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
-	clipApp.kClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead")
+	clipApp.vClip = $("#clipper").get(0);
+	clipApp.vClip.addJsListener("clipStartChanged", "clipApp.updateStartTime");
+	clipApp.vClip.addJsListener("clipEndChanged", "clipApp.updateEndTime");
+	clipApp.vClip.addJsListener("entryReady", "clipApp.enableAddClip");
+	clipApp.vClip.addJsListener("clipAdded", "clipApp.clipAdded");
+	clipApp.vClip.addJsListener("clipperError", "clipApp.showError");
+	clipApp.vClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
+	clipApp.vClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead")
 };
 
 /* Init the App */
@@ -58,16 +58,16 @@ clipApp.player = {
 	doFirstPlay: function() {
 		clipApp.log('doFirstPlay');
 		clipApp.player.firstLoad = true;
-		clipApp.kdp.sendNotification("doPlay");
+		clipApp.vdp.sendNotification("doPlay");
 	},
 
 	playerPlaying: function() {
 		clipApp.log('clipApp.player.playerPlaying');
 		if( clipApp.player.firstLoad ) {
-			clipApp.log('pauseKdp');
+			clipApp.log('pauseVdp');
 			clipApp.player.firstLoad = false;
 			setTimeout( function() {
-				clipApp.kdp.sendNotification("doPause");
+				clipApp.vdp.sendNotification("doPause");
 			}, 50);
 		}
 		clipApp.vars.removeBlackScreen = true;
@@ -79,8 +79,8 @@ clipApp.player = {
 
 	playerPaused: function() {
 		clipApp.vars.playerPlaying = false;
-		clipApp.kClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
-		clipApp.kdp.removeJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
+		clipApp.vClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+		clipApp.vdp.removeJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
 	},
 
 	updatePlayhead: function(val) {
@@ -99,7 +99,7 @@ clipApp.player = {
 
 	durationChange:function(data) {
 		clipApp.vars.entry.msDuration = data.newValue*1000;
-		clipApp.kClip.setDuration(data.newValue*1000);
+		clipApp.vClip.setDuration(data.newValue*1000);
 
 	}
 };
@@ -292,8 +292,8 @@ clipApp.doPreview = function() {
 
 	clipApp.vars.removeBlackScreen = false;
 
-	clipApp.kdp.removeJsListener("doSeek", "clipApp.onSeek");
-	clipApp.kClip.updateZoomIndex(0);
+	clipApp.vdp.removeJsListener("doSeek", "clipApp.onSeek");
+	clipApp.vClip.updateZoomIndex(0);
 
 	if( clipApp.vars.playerPlaying ){
 		clipApp.vdp.sendNotification("doPause");
@@ -305,7 +305,7 @@ clipApp.doPreview = function() {
 	clipApp.vdp.sendNotification("doPlay");
 	clipApp.vdp.sendNotification("doPlay");
 
-	clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
+	clipApp.vdp.addJsListener("doSeek", "clipApp.onSeek");
 };
 
 clipApp.onSeek = function(val) {
@@ -314,7 +314,7 @@ clipApp.onSeek = function(val) {
 		clipApp.vdp.setVDPAttribute("blackScreen", "visible", "false" );
 	}
 
-	if( clipApp.vars.seekFromKClip === false ) {
+	if( clipApp.vars.seekFromVClip === false ) {
 		clipApp.clipper.updatePlayhead(val);
 	} else {
 		clipApp.vars.seekFromVClip = false;

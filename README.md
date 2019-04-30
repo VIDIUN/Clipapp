@@ -13,7 +13,7 @@ ClipApp is Vidiun Clipping and Trimming application. The app allows you to trim 
 
 #### In Vidiun Managment Console (VMC)
 
-1. Download specific tag into ```/opt/kaltura/apps/clipapp/{version}```
-2. Open KMC -> Entry Drilldown -> Trim / Clip
+1. Download specific tag into ```/opt/vidiun/apps/clipapp/{version}```
+2. Open VMC -> Entry Drilldown -> Trim / Clip
 
 If you would like to change the settings you can create a config.local.php file with settings specific to your enviornment. 
