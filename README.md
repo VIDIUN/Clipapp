@@ -1,22 +1,22 @@
 ClipApp
 ========
 
-ClipApp is Kaltura Clipping and Trimming application. The app allows you to trim and clip Kaltura entries.
+ClipApp is Vidiun Clipping and Trimming application. The app allows you to trim and clip Vidiun entries.
 
 ## Installtation 
 
 #### Standalone
 
 1. Clone this repo into web accessible folder such as ```htdocs``` or ```www```
-2. Edit ```config.php``` with your Kaltura credentials.
+2. Edit ```config.php``` with your Vidiun credentials.
 3. Open your browser at: ```http://localhost/clipapp/index.php?entryId={YOUR ENTRY ID HERE}``` 
 
-#### In Kaltura Managment Console (KMC)
+#### In Vidiun Managment Console (VMC)
 
-1. Download specific tag into ```/opt/kaltura/apps/clipapp/{version}```
-2. Rename ```config.kmc.php``` to ```config.local.php``` run: 
+1. Download specific tag into ```/opt/vidiun/apps/clipapp/{version}```
+2. Rename ```config.vmc.php``` to ```config.local.php``` run: 
 
   ```
-  mv config.kmc.php config.local.php
+  mv config.vmc.php config.local.php
   ```
-3. Open KMC -> Entry Drilldown -> Trim / Clip
+3. Open VMC -> Entry Drilldown -> Trim / Clip

@@ -7,16 +7,16 @@ require_once('init.php');
 $entryId = (isset($_GET['entryId']) ? htmlspecialchars($_GET['entryId']) : $conf['entry_id']);
 
 // html5 library location
-$html5Url = $protocol . '://' . $conf['host'] . '/p/' . $conf['partner_id'] ."/sp/". $conf['partner_id'] ."00/embedIframeJs/uiconf_id/". $conf['kdp_uiconf_id'] ."/partner_id/". $conf['partner_id'];
+$html5Url = $protocol . '://' . $conf['host'] . '/p/' . $conf['partner_id'] ."/sp/". $conf['partner_id'] ."00/embedIframeJs/uiconf_id/". $conf['vdp_uiconf_id'] ."/partner_id/". $conf['partner_id'];
 
-// Create Kdp Url
-$kdpUrl = $protocol . '://' . $conf['host'] . '/kwidget/wid/_' . $conf['partner_id'] . '/uiconf_id/' . $conf['kdp_uiconf_id'] . '/entry_id/' . $entryId;
+// Create Vdp Url
+$vdpUrl = $protocol . '://' . $conf['host'] . '/vwidget/wid/_' . $conf['partner_id'] . '/uiconf_id/' . $conf['vdp_uiconf_id'] . '/entry_id/' . $entryId;
 
 // Create Clipper Url & Flashvars
-$clipperUrl = $protocol . '://' . $conf['host'] . '/kgeneric/ui_conf_id/' . $conf['clipper_uiconf_id'];
-//$clipperUrl = "http://localhost/Clipper/bin-debug/KClip.swf?host=http://www.kaltura.com&uiConfId=21224322&cdnHost=cdnbakmi.kaltura.com";
+$clipperUrl = $protocol . '://' . $conf['host'] . '/vgeneric/ui_conf_id/' . $conf['clipper_uiconf_id'];
+//$clipperUrl = "http://localhost/Clipper/bin-debug/VClip.swf?host=http://www.vidiun.com&uiConfId=21224322&cdnHost=cdnbakmi.vidiun.com";
 $clipperFlashvars = '&entry_id=' . $entryId . '&partner_id=' . $conf['partner_id'] . '&host=' . $conf['host'] . '&uiconfId=' . $conf['clipper_uiconf_id'];
-$clipperFlashvars .= '&ks=' . $ks . '&show_add_delete_buttons=false&state=clippingState&jsReadyFunc=clipperReady';
+$clipperFlashvars .= '&vs=' . $vs . '&show_add_delete_buttons=false&state=clippingState&jsReadyFunc=clipperReady';
 $clipperFlashvars .= '&max_allowed_rows=1&show_control_bar=true&show_message_box=false&protocol=' . $protocol . '://';
 
 if(!$entryId)
@@ -47,9 +47,9 @@ $clipAppConfig = array(
 	"host" => $conf['host'],
 	"partner_id" => $conf['partner_id'],
 	"entry" => ($entry) ? $entry : null,
-	"ks" => $ks,
-	"kdp_uiconf_id" => $conf['kdp_uiconf_id'],
-	"kclip_uiconf_id" => $conf['clipper_uiconf_id'],
+	"vs" => $vs,
+	"vdp_uiconf_id" => $conf['vdp_uiconf_id'],
+	"vclip_uiconf_id" => $conf['clipper_uiconf_id'],
 	"redirect_save" => $conf['redirect_save'],
 	"redirect_url" => $conf['redirect_url'],
 	"overwrite_entry" => $conf['overwrite_entry'],
@@ -79,14 +79,14 @@ $clipAppConfig = array(
 <!--[if IE 9 ]><body class="ie ie9"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--><body><!--<![endif]-->
 		<div id="wrapper">
-			<object id="kdp3" name="kdp3" type="application/x-shockwave-flash" wmode="window" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" bgcolor="#000000" data="<?php echo $kdpUrl; ?>">
+			<object id="vdp3" name="vdp3" type="application/x-shockwave-flash" wmode="window" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" bgcolor="#000000" data="<?php echo $vdpUrl; ?>">
 				<param name="allowFullScreen" value="true" />
 				<param name="allowNetworking" value="all" />
 				<param name="allowScriptAccess" value="always" />
 				<param name="wmode" value="window" />
 				<param name="bgcolor" value="#000000" />
-				<param name="flashVars" value="ks=<?php echo $ks;?>&streamerType=auto&autoPlay=true&useLiveStreamMinDuration=true" />
-				<param name="movie" value="<?php echo $kdpUrl; ?>" />
+				<param name="flashVars" value="vs=<?php echo $vs;?>&streamerType=auto&autoPlay=true&useLiveStreamMinDuration=true" />
+				<param name="movie" value="<?php echo $vdpUrl; ?>" />
 			</object>
 			<div id="form" class="form clearfix">
 				<div id="newclip"><div class="disable"></div><img id="loader" src="images/loader.gif" alt="<?php echo t('Saving'); ?>..." /><?php echo $form_title; ?></div>

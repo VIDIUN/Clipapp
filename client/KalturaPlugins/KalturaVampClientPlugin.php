@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaMediaEntryWithDistributionsOrderBy
+class VidiunMediaEntryWithDistributionsOrderBy
 {
 	const MEDIA_TYPE_ASC = "+mediaType";
 	const MEDIA_TYPE_DESC = "-mediaType";
@@ -29,7 +29,7 @@ class KalturaMediaEntryWithDistributionsOrderBy
 	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
-class KalturaVampEntryOrderBy
+class VidiunVampEntryOrderBy
 {
 	const PUBLISHING_STARTED_AT_ASC = "+publishingStartedAt";
 	const PUBLISHING_STARTED_AT_DESC = "-publishingStartedAt";
@@ -39,7 +39,7 @@ class KalturaVampEntryOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
-class KalturaVampWorkflowStatus
+class VidiunVampWorkflowStatus
 {
 	const INCOMPLETE = 0;
 	const COMPLETE = 1;
@@ -51,7 +51,7 @@ class KalturaVampWorkflowStatus
 	const REJECTED = 14;
 }
 
-class KalturaVampSystemStatusSummary extends KalturaObjectBase
+class VidiunVampSystemStatusSummary extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -98,12 +98,12 @@ class KalturaVampSystemStatusSummary extends KalturaObjectBase
 
 }
 
-class KalturaEntryDistributionDetails extends KalturaObjectBase
+class VidiunEntryDistributionDetails extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaMediaEntry
+	 * @var VidiunMediaEntry
 	 */
 	public $entry;
 
@@ -117,24 +117,24 @@ class KalturaEntryDistributionDetails extends KalturaObjectBase
 
 }
 
-class KalturaMediaEntryWithDistributions extends KalturaMediaEntry
+class VidiunMediaEntryWithDistributions extends VidiunMediaEntry
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaEntryDistribution
+	 * @var array of VidiunEntryDistribution
 	 */
 	public $entryDistributions;
 
 
 }
 
-class KalturaMediaEntryWithDistributionsResponse extends KalturaObjectBase
+class VidiunMediaEntryWithDistributionsResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMediaEntryWithDistributions
+	 * @var array of VidiunMediaEntryWithDistributions
 	 * @readonly
 	 */
 	public $objects;
@@ -150,7 +150,7 @@ class KalturaMediaEntryWithDistributionsResponse extends KalturaObjectBase
 
 }
 
-class KalturaVampEntry extends KalturaObjectBase
+class VidiunVampEntry extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -171,7 +171,7 @@ class KalturaVampEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -179,7 +179,7 @@ class KalturaVampEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaVampWorkflowStatus
+	 * @var VidiunVampWorkflowStatus
 	 * @readonly
 	 */
 	public $workflowStatus = null;
@@ -211,7 +211,7 @@ class KalturaVampEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBaseEntry
+	 * @var VidiunBaseEntry
 	 * @readonly
 	 */
 	public $entry;
@@ -219,7 +219,7 @@ class KalturaVampEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaEntryDistribution
+	 * @var array of VidiunEntryDistribution
 	 * @readonly
 	 */
 	public $entryDistributions;
@@ -227,7 +227,7 @@ class KalturaVampEntry extends KalturaObjectBase
 
 }
 
-abstract class KalturaVampEntryBaseFilter extends KalturaFilter
+abstract class VidiunVampEntryBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -267,14 +267,14 @@ abstract class KalturaVampEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 */
 	public $statusEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 */
 	public $statusNotEqual = null;
 
@@ -295,7 +295,7 @@ abstract class KalturaVampEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaVampWorkflowStatus
+	 * @var VidiunVampWorkflowStatus
 	 */
 	public $workflowStatusEqual = null;
 
@@ -316,17 +316,17 @@ abstract class KalturaVampEntryBaseFilter extends KalturaFilter
 
 }
 
-class KalturaVampEntryFilter extends KalturaVampEntryBaseFilter
+class VidiunVampEntryFilter extends VidiunVampEntryBaseFilter
 {
 
 }
 
-class KalturaVampEntryListResponse extends KalturaObjectBase
+class VidiunVampEntryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaVampEntry
+	 * @var array of VidiunVampEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -342,40 +342,40 @@ class KalturaVampEntryListResponse extends KalturaObjectBase
 
 }
 
-abstract class KalturaMediaEntryWithDistributionsBaseFilter extends KalturaMediaEntryFilter
+abstract class VidiunMediaEntryWithDistributionsBaseFilter extends VidiunMediaEntryFilter
 {
 
 }
 
-class KalturaMediaEntryWithDistributionsFilter extends KalturaMediaEntryWithDistributionsBaseFilter
+class VidiunMediaEntryWithDistributionsFilter extends VidiunMediaEntryWithDistributionsBaseFilter
 {
 
 }
 
 
-class KalturaDashboardService extends KalturaServiceBase
+class VidiunDashboardService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	function getSystemStatusSummary()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("vamp_dashboard", "getSystemStatusSummary", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vamp_dashboard", "getSystemStatusSummary", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVampSystemStatusSummary");
+		$this->client->validateObjectType($resultObject, "VidiunVampSystemStatusSummary");
 		return $resultObject;
 	}
 
 	function getEntriesForDistributionSunriseLast24Hours()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("vamp_dashboard", "getEntriesForDistributionSunriseLast24Hours", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vamp_dashboard", "getEntriesForDistributionSunriseLast24Hours", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -386,8 +386,8 @@ class KalturaDashboardService extends KalturaServiceBase
 
 	function getEntriesForDistributionSunsetLast24Hours()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("vamp_dashboard", "getEntriesForDistributionSunsetLast24Hours", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vamp_dashboard", "getEntriesForDistributionSunsetLast24Hours", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -398,9 +398,9 @@ class KalturaDashboardService extends KalturaServiceBase
 
 	function getLastDistributedEntries($limit)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "limit", $limit);
-		$this->client->queueServiceActionCall("vamp_dashboard", "getLastDistributedEntries", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "limit", $limit);
+		$this->client->queueServiceActionCall("vamp_dashboard", "getLastDistributedEntries", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -409,27 +409,27 @@ class KalturaDashboardService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function listMediaWithEntryDistributions(KalturaMediaEntryFilter $filter = null, KalturaFilterPager $pager = null)
+	function listMediaWithEntryDistributions(VidiunMediaEntryFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("vamp_dashboard", "listMediaWithEntryDistributions", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("vamp_dashboard", "listMediaWithEntryDistributions", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaEntryWithDistributionsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMediaEntryWithDistributionsResponse");
 		return $resultObject;
 	}
 
 	function notifyEntryCreatedFromUploadPage($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("vamp_dashboard", "notifyEntryCreatedFromUploadPage", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("vamp_dashboard", "notifyEntryCreatedFromUploadPage", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -439,47 +439,47 @@ class KalturaDashboardService extends KalturaServiceBase
 	}
 }
 
-class KalturaVampEntryService extends KalturaServiceBase
+class VidiunVampEntryService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampentry", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampentry", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVampEntry");
+		$this->client->validateObjectType($resultObject, "VidiunVampEntry");
 		return $resultObject;
 	}
 
-	function listAction(KalturaVampEntryFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunVampEntryFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("vamp_vampentry", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("vamp_vampentry", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVampEntryListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunVampEntryListResponse");
 		return $resultObject;
 	}
 
 	function approve($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampentry", "approve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampentry", "approve", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -490,9 +490,9 @@ class KalturaVampEntryService extends KalturaServiceBase
 
 	function reject($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampentry", "reject", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampentry", "reject", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -503,9 +503,9 @@ class KalturaVampEntryService extends KalturaServiceBase
 
 	function submitForModeration($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampentry", "submitForModeration", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampentry", "submitForModeration", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -516,9 +516,9 @@ class KalturaVampEntryService extends KalturaServiceBase
 
 	function publish($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampentry", "publish", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampentry", "publish", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -528,58 +528,58 @@ class KalturaVampEntryService extends KalturaServiceBase
 	}
 }
 
-class KalturaVampUiConfService extends KalturaServiceBase
+class VidiunVampUiConfService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function add(KalturaUiConf $uiConf)
+	function add(VidiunUiConf $uiConf)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "uiConf", $uiConf->toParams());
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "uiConf", $uiConf->toParams());
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConf");
+		$this->client->validateObjectType($resultObject, "VidiunUiConf");
 		return $resultObject;
 	}
 
-	function update($id, KalturaUiConf $uiConf)
+	function update($id, VidiunUiConf $uiConf)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "uiConf", $uiConf->toParams());
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "uiConf", $uiConf->toParams());
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConf");
+		$this->client->validateObjectType($resultObject, "VidiunUiConf");
 		return $resultObject;
 	}
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConf");
+		$this->client->validateObjectType($resultObject, "VidiunUiConf");
 		return $resultObject;
 	}
 
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -590,53 +590,53 @@ class KalturaVampUiConfService extends KalturaServiceBase
 
 	function cloneAction($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "clone", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "clone", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConf");
+		$this->client->validateObjectType($resultObject, "VidiunUiConf");
 		return $resultObject;
 	}
 
-	function listTemplates(KalturaUiConfFilter $filter = null, KalturaFilterPager $pager = null)
+	function listTemplates(VidiunUiConfFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "listTemplates", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "listTemplates", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfListResponse");
 		return $resultObject;
 	}
 
-	function listAction(KalturaUiConfFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunUiConfFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfListResponse");
 		return $resultObject;
 	}
 
 	function getAvailableTypes()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("vamp_vampuiconf", "getAvailableTypes", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vamp_vampuiconf", "getAvailableTypes", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -645,48 +645,48 @@ class KalturaVampUiConfService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
-class KalturaVampClientPlugin extends KalturaClientPlugin
+class VidiunVampClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaVampClientPlugin
+	 * @var VidiunVampClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaDashboardService
+	 * @var VidiunDashboardService
 	 */
 	public $dashboard = null;
 
 	/**
-	 * @var KalturaVampEntryService
+	 * @var VidiunVampEntryService
 	 */
 	public $vampEntry = null;
 
 	/**
-	 * @var KalturaVampUiConfService
+	 * @var VidiunVampUiConfService
 	 */
 	public $vampUiConf = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->dashboard = new KalturaDashboardService($client);
-		$this->vampEntry = new KalturaVampEntryService($client);
-		$this->vampUiConf = new KalturaVampUiConfService($client);
+		$this->dashboard = new VidiunDashboardService($client);
+		$this->vampEntry = new VidiunVampEntryService($client);
+		$this->vampUiConf = new VidiunVampUiConfService($client);
 	}
 
 	/**
-	 * @return KalturaVampClientPlugin
+	 * @return VidiunVampClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaVampClientPlugin($client);
+			self::$instance = new VidiunVampClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

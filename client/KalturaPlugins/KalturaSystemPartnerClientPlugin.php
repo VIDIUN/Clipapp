@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaSystemPartnerLimitType
+class VidiunSystemPartnerLimitType
 {
 	const ENTRIES = "ENTRIES";
 	const STREAM_ENTRIES = "STREAM_ENTRIES";
@@ -15,7 +15,7 @@ class KalturaSystemPartnerLimitType
 	const BULK_SIZE = "BULK_SIZE";
 }
 
-class KalturaSystemPartnerUsageFilter extends KalturaFilter
+class VidiunSystemPartnerUsageFilter extends VidiunFilter
 {
 	/**
 	 * Date range from
@@ -36,7 +36,7 @@ class KalturaSystemPartnerUsageFilter extends KalturaFilter
 
 }
 
-class KalturaSystemPartnerUsageItem extends KalturaObjectBase
+class VidiunSystemPartnerUsageItem extends VidiunObjectBase
 {
 	/**
 	 * Partner ID
@@ -58,7 +58,7 @@ class KalturaSystemPartnerUsageItem extends KalturaObjectBase
 	 * Partner status
 	 * 
 	 *
-	 * @var KalturaPartnerStatus
+	 * @var VidiunPartnerStatus
 	 */
 	public $partnerStatus = null;
 
@@ -169,12 +169,12 @@ class KalturaSystemPartnerUsageItem extends KalturaObjectBase
 
 }
 
-class KalturaSystemPartnerUsageListResponse extends KalturaObjectBase
+class VidiunSystemPartnerUsageListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaSystemPartnerUsageItem
+	 * @var array of VidiunSystemPartnerUsageItem
 	 */
 	public $objects;
 
@@ -188,12 +188,12 @@ class KalturaSystemPartnerUsageListResponse extends KalturaObjectBase
 
 }
 
-class KalturaSystemPartnerLimit extends KalturaObjectBase
+class VidiunSystemPartnerLimit extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaSystemPartnerLimitType
+	 * @var VidiunSystemPartnerLimitType
 	 */
 	public $type = null;
 
@@ -214,7 +214,7 @@ class KalturaSystemPartnerLimit extends KalturaObjectBase
 
 }
 
-class KalturaSystemPartnerConfiguration extends KalturaObjectBase
+class VidiunSystemPartnerConfiguration extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -291,12 +291,12 @@ class KalturaSystemPartnerConfiguration extends KalturaObjectBase
 	 *
 	 * @var bool
 	 */
-	public $storageDeleteFromKaltura = null;
+	public $storageDeleteFromVidiun = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageServePriority
+	 * @var VidiunStorageServePriority
 	 */
 	public $storageServePriority = null;
 
@@ -305,7 +305,7 @@ class KalturaSystemPartnerConfiguration extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $kmcVersion = null;
+	public $vmcVersion = null;
 
 	/**
 	 * 
@@ -345,7 +345,7 @@ class KalturaSystemPartnerConfiguration extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPermission
+	 * @var array of VidiunPermission
 	 */
 	public $permissions;
 
@@ -394,7 +394,7 @@ class KalturaSystemPartnerConfiguration extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerGroupType
+	 * @var VidiunPartnerGroupType
 	 */
 	public $partnerGroupType = null;
 
@@ -408,14 +408,14 @@ class KalturaSystemPartnerConfiguration extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaSystemPartnerLimit
+	 * @var array of VidiunSystemPartnerLimit
 	 */
 	public $limits;
 
 
 }
 
-class KalturaSystemPartnerPackage extends KalturaObjectBase
+class VidiunSystemPartnerPackage extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -435,66 +435,66 @@ class KalturaSystemPartnerPackage extends KalturaObjectBase
 }
 
 
-class KalturaSystemPartnerService extends KalturaServiceBase
+class VidiunSystemPartnerService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	function get($partnerId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("systempartner_systempartner", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->queueServiceActionCall("systempartner_systempartner", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPartner");
+		$this->client->validateObjectType($resultObject, "VidiunPartner");
 		return $resultObject;
 	}
 
-	function getUsage(KalturaPartnerFilter $partnerFilter = null, KalturaSystemPartnerUsageFilter $usageFilter = null, KalturaFilterPager $pager = null)
+	function getUsage(VidiunPartnerFilter $partnerFilter = null, VidiunSystemPartnerUsageFilter $usageFilter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($partnerFilter !== null)
-			$this->client->addParam($kparams, "partnerFilter", $partnerFilter->toParams());
+			$this->client->addParam($vparams, "partnerFilter", $partnerFilter->toParams());
 		if ($usageFilter !== null)
-			$this->client->addParam($kparams, "usageFilter", $usageFilter->toParams());
+			$this->client->addParam($vparams, "usageFilter", $usageFilter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("systempartner_systempartner", "getUsage", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("systempartner_systempartner", "getUsage", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSystemPartnerUsageListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunSystemPartnerUsageListResponse");
 		return $resultObject;
 	}
 
-	function listAction(KalturaPartnerFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunPartnerFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("systempartner_systempartner", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("systempartner_systempartner", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPartnerListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunPartnerListResponse");
 		return $resultObject;
 	}
 
 	function updateStatus($partnerId, $status)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->addParam($kparams, "status", $status);
-		$this->client->queueServiceActionCall("systempartner_systempartner", "updateStatus", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->addParam($vparams, "status", $status);
+		$this->client->queueServiceActionCall("systempartner_systempartner", "updateStatus", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -505,10 +505,10 @@ class KalturaSystemPartnerService extends KalturaServiceBase
 
 	function getAdminSession($partnerId, $userId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->addParam($kparams, "userId", $userId);
-		$this->client->queueServiceActionCall("systempartner_systempartner", "getAdminSession", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->addParam($vparams, "userId", $userId);
+		$this->client->queueServiceActionCall("systempartner_systempartner", "getAdminSession", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -517,12 +517,12 @@ class KalturaSystemPartnerService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateConfiguration($partnerId, KalturaSystemPartnerConfiguration $configuration)
+	function updateConfiguration($partnerId, VidiunSystemPartnerConfiguration $configuration)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("systempartner_systempartner", "updateConfiguration", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->addParam($vparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("systempartner_systempartner", "updateConfiguration", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -533,21 +533,21 @@ class KalturaSystemPartnerService extends KalturaServiceBase
 
 	function getConfiguration($partnerId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("systempartner_systempartner", "getConfiguration", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->queueServiceActionCall("systempartner_systempartner", "getConfiguration", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSystemPartnerConfiguration");
+		$this->client->validateObjectType($resultObject, "VidiunSystemPartnerConfiguration");
 		return $resultObject;
 	}
 
 	function getPackages()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("systempartner_systempartner", "getPackages", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("systempartner_systempartner", "getPackages", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -558,11 +558,11 @@ class KalturaSystemPartnerService extends KalturaServiceBase
 
 	function resetUserPassword($userId, $partnerId, $newPassword)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "userId", $userId);
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->addParam($kparams, "newPassword", $newPassword);
-		$this->client->queueServiceActionCall("systempartner_systempartner", "resetUserPassword", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "userId", $userId);
+		$this->client->addParam($vparams, "partnerId", $partnerId);
+		$this->client->addParam($vparams, "newPassword", $newPassword);
+		$this->client->queueServiceActionCall("systempartner_systempartner", "resetUserPassword", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -571,36 +571,36 @@ class KalturaSystemPartnerService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
-class KalturaSystemPartnerClientPlugin extends KalturaClientPlugin
+class VidiunSystemPartnerClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaSystemPartnerClientPlugin
+	 * @var VidiunSystemPartnerClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaSystemPartnerService
+	 * @var VidiunSystemPartnerService
 	 */
 	public $systemPartner = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->systemPartner = new KalturaSystemPartnerService($client);
+		$this->systemPartner = new VidiunSystemPartnerService($client);
 	}
 
 	/**
-	 * @return KalturaSystemPartnerClientPlugin
+	 * @return VidiunSystemPartnerClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaSystemPartnerClientPlugin($client);
+			self::$instance = new VidiunSystemPartnerClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

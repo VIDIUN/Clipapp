@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaAnnotationOrderBy
+class VidiunAnnotationOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
@@ -11,7 +11,7 @@ class KalturaAnnotationOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
-abstract class KalturaAnnotationBaseFilter extends KalturaFilter
+abstract class VidiunAnnotationBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -86,12 +86,12 @@ abstract class KalturaAnnotationBaseFilter extends KalturaFilter
 
 }
 
-class KalturaAnnotationFilter extends KalturaAnnotationBaseFilter
+class VidiunAnnotationFilter extends VidiunAnnotationBaseFilter
 {
 
 }
 
-class KalturaAnnotation extends KalturaObjectBase
+class VidiunAnnotation extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -185,12 +185,12 @@ class KalturaAnnotation extends KalturaObjectBase
 
 }
 
-class KalturaAnnotationListResponse extends KalturaObjectBase
+class VidiunAnnotationListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAnnotation
+	 * @var array of VidiunAnnotation
 	 * @readonly
 	 */
 	public $objects;
@@ -207,60 +207,60 @@ class KalturaAnnotationListResponse extends KalturaObjectBase
 }
 
 
-class KalturaAnnotationService extends KalturaServiceBase
+class VidiunAnnotationService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaAnnotationFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunAnnotationFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotationListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotationListResponse");
 		return $resultObject;
 	}
 
-	function add(KalturaAnnotation $annotation)
+	function add(VidiunAnnotation $annotation)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "annotation", $annotation->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "annotation", $annotation->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotation");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotation");
 		return $resultObject;
 	}
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("annotation_annotation", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("annotation_annotation", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotation");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotation");
 		return $resultObject;
 	}
 
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("annotation_annotation", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("annotation_annotation", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -269,50 +269,50 @@ class KalturaAnnotationService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function update($id, KalturaAnnotation $annotation)
+	function update($id, VidiunAnnotation $annotation)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "annotation", $annotation->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "annotation", $annotation->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotation");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotation");
 		return $resultObject;
 	}
 }
-class KalturaAnnotationClientPlugin extends KalturaClientPlugin
+class VidiunAnnotationClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaAnnotationClientPlugin
+	 * @var VidiunAnnotationClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaAnnotationService
+	 * @var VidiunAnnotationService
 	 */
 	public $annotation = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->annotation = new KalturaAnnotationService($client);
+		$this->annotation = new VidiunAnnotationService($client);
 	}
 
 	/**
-	 * @return KalturaAnnotationClientPlugin
+	 * @return VidiunAnnotationClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaAnnotationClientPlugin($client);
+			self::$instance = new VidiunAnnotationClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaStatsKey extends KalturaObjectBase
+class VidiunStatsKey extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -45,12 +45,12 @@ class KalturaStatsKey extends KalturaObjectBase
 
 }
 
-class KalturaStatsKeyListResponse extends KalturaObjectBase
+class VidiunStatsKeyListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaStatsKey
+	 * @var array of VidiunStatsKey
 	 * @readonly
 	 */
 	public $objects;
@@ -67,56 +67,56 @@ class KalturaStatsKeyListResponse extends KalturaObjectBase
 }
 
 
-class KalturaStatskeyService extends KalturaServiceBase
+class VidiunStatskeyService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	function listDescendants($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("statskey_statskey", "listDescendants", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("statskey_statskey", "listDescendants", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaStatsKeyListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunStatsKeyListResponse");
 		return $resultObject;
 	}
 }
-class KalturaStatskeyClientPlugin extends KalturaClientPlugin
+class VidiunStatskeyClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaStatskeyClientPlugin
+	 * @var VidiunStatskeyClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaStatskeyService
+	 * @var VidiunStatskeyService
 	 */
 	public $Statskey = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->Statskey = new KalturaStatskeyService($client);
+		$this->Statskey = new VidiunStatskeyService($client);
 	}
 
 	/**
-	 * @return KalturaStatskeyClientPlugin
+	 * @return VidiunStatskeyClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaStatskeyClientPlugin($client);
+			self::$instance = new VidiunStatskeyClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

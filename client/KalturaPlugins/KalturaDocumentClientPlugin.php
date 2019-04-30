@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaDocumentEntryOrderBy
+class VidiunDocumentEntryOrderBy
 {
 	const NAME_ASC = "+name";
 	const NAME_DESC = "-name";
@@ -19,43 +19,43 @@ class KalturaDocumentEntryOrderBy
 	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
-class KalturaDocumentFlavorParamsOrderBy
+class VidiunDocumentFlavorParamsOrderBy
 {
 }
 
-class KalturaDocumentFlavorParamsOutputOrderBy
+class VidiunDocumentFlavorParamsOutputOrderBy
 {
 }
 
-class KalturaDocumentType
+class VidiunDocumentType
 {
 	const DOCUMENT = 11;
 	const SWF = 12;
 	const PDF = 13;
 }
 
-class KalturaPdfFlavorParamsOrderBy
+class VidiunPdfFlavorParamsOrderBy
 {
 }
 
-class KalturaPdfFlavorParamsOutputOrderBy
+class VidiunPdfFlavorParamsOutputOrderBy
 {
 }
 
-class KalturaSwfFlavorParamsOrderBy
+class VidiunSwfFlavorParamsOrderBy
 {
 }
 
-class KalturaSwfFlavorParamsOutputOrderBy
+class VidiunSwfFlavorParamsOutputOrderBy
 {
 }
 
-class KalturaDocumentEntry extends KalturaBaseEntry
+class VidiunDocumentEntry extends VidiunBaseEntry
 {
 	/**
 	 * The type of the document
 	 *
-	 * @var KalturaDocumentType
+	 * @var VidiunDocumentType
 	 * @insertonly
 	 */
 	public $documentType = null;
@@ -63,12 +63,12 @@ class KalturaDocumentEntry extends KalturaBaseEntry
 
 }
 
-abstract class KalturaDocumentEntryBaseFilter extends KalturaBaseEntryFilter
+abstract class VidiunDocumentEntryBaseFilter extends VidiunBaseEntryFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDocumentType
+	 * @var VidiunDocumentType
 	 */
 	public $documentTypeEqual = null;
 
@@ -82,17 +82,17 @@ abstract class KalturaDocumentEntryBaseFilter extends KalturaBaseEntryFilter
 
 }
 
-class KalturaDocumentEntryFilter extends KalturaDocumentEntryBaseFilter
+class VidiunDocumentEntryFilter extends VidiunDocumentEntryBaseFilter
 {
 
 }
 
-class KalturaDocumentListResponse extends KalturaObjectBase
+class VidiunDocumentListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDocumentEntry
+	 * @var array of VidiunDocumentEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -108,77 +108,77 @@ class KalturaDocumentListResponse extends KalturaObjectBase
 
 }
 
-abstract class KalturaDocumentFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunDocumentFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
-class KalturaDocumentFlavorParamsFilter extends KalturaDocumentFlavorParamsBaseFilter
+class VidiunDocumentFlavorParamsFilter extends VidiunDocumentFlavorParamsBaseFilter
 {
 
 }
 
-abstract class KalturaDocumentFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunDocumentFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
-class KalturaDocumentFlavorParamsOutputFilter extends KalturaDocumentFlavorParamsOutputBaseFilter
+class VidiunDocumentFlavorParamsOutputFilter extends VidiunDocumentFlavorParamsOutputBaseFilter
 {
 
 }
 
-abstract class KalturaPdfFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunPdfFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
-class KalturaPdfFlavorParamsFilter extends KalturaPdfFlavorParamsBaseFilter
+class VidiunPdfFlavorParamsFilter extends VidiunPdfFlavorParamsBaseFilter
 {
 
 }
 
-abstract class KalturaPdfFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunPdfFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
-class KalturaPdfFlavorParamsOutputFilter extends KalturaPdfFlavorParamsOutputBaseFilter
+class VidiunPdfFlavorParamsOutputFilter extends VidiunPdfFlavorParamsOutputBaseFilter
 {
 
 }
 
-abstract class KalturaSwfFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunSwfFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
-class KalturaSwfFlavorParamsFilter extends KalturaSwfFlavorParamsBaseFilter
+class VidiunSwfFlavorParamsFilter extends VidiunSwfFlavorParamsBaseFilter
 {
 
 }
 
-abstract class KalturaSwfFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunSwfFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
-class KalturaSwfFlavorParamsOutputFilter extends KalturaSwfFlavorParamsOutputBaseFilter
+class VidiunSwfFlavorParamsOutputFilter extends VidiunSwfFlavorParamsOutputBaseFilter
 {
 
 }
 
-class KalturaDocumentFlavorParams extends KalturaFlavorParams
+class VidiunDocumentFlavorParams extends VidiunFlavorParams
 {
 
 }
 
-class KalturaDocumentFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunDocumentFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 
 }
 
-class KalturaPdfFlavorParams extends KalturaFlavorParams
+class VidiunPdfFlavorParams extends VidiunFlavorParams
 {
 	/**
 	 * 
@@ -190,7 +190,7 @@ class KalturaPdfFlavorParams extends KalturaFlavorParams
 
 }
 
-class KalturaPdfFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunPdfFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 	/**
 	 * 
@@ -202,80 +202,80 @@ class KalturaPdfFlavorParamsOutput extends KalturaFlavorParamsOutput
 
 }
 
-class KalturaSwfFlavorParams extends KalturaFlavorParams
+class VidiunSwfFlavorParams extends VidiunFlavorParams
 {
 
 }
 
-class KalturaSwfFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunSwfFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 
 }
 
 
-class KalturaDocumentsService extends KalturaServiceBase
+class VidiunDocumentsService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function addFromUploadedFile(KalturaDocumentEntry $documentEntry, $uploadTokenId)
+	function addFromUploadedFile(VidiunDocumentEntry $documentEntry, $uploadTokenId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->addParam($kparams, "uploadTokenId", $uploadTokenId);
-		$this->client->queueServiceActionCall("document_documents", "addFromUploadedFile", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->addParam($vparams, "uploadTokenId", $uploadTokenId);
+		$this->client->queueServiceActionCall("document_documents", "addFromUploadedFile", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
-	function addFromEntry($sourceEntryId, KalturaDocumentEntry $documentEntry = null, $sourceFlavorParamsId = null)
+	function addFromEntry($sourceEntryId, VidiunDocumentEntry $documentEntry = null, $sourceFlavorParamsId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "sourceEntryId", $sourceEntryId);
+		$vparams = array();
+		$this->client->addParam($vparams, "sourceEntryId", $sourceEntryId);
 		if ($documentEntry !== null)
-			$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->addParam($kparams, "sourceFlavorParamsId", $sourceFlavorParamsId);
-		$this->client->queueServiceActionCall("document_documents", "addFromEntry", $kparams);
+			$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->addParam($vparams, "sourceFlavorParamsId", $sourceFlavorParamsId);
+		$this->client->queueServiceActionCall("document_documents", "addFromEntry", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
-	function addFromFlavorAsset($sourceFlavorAssetId, KalturaDocumentEntry $documentEntry = null)
+	function addFromFlavorAsset($sourceFlavorAssetId, VidiunDocumentEntry $documentEntry = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "sourceFlavorAssetId", $sourceFlavorAssetId);
+		$vparams = array();
+		$this->client->addParam($vparams, "sourceFlavorAssetId", $sourceFlavorAssetId);
 		if ($documentEntry !== null)
-			$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->queueServiceActionCall("document_documents", "addFromFlavorAsset", $kparams);
+			$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->queueServiceActionCall("document_documents", "addFromFlavorAsset", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
 	function convert($entryId, $conversionProfileId = null, array $dynamicConversionAttributes = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "conversionProfileId", $conversionProfileId);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "conversionProfileId", $conversionProfileId);
 		if ($dynamicConversionAttributes !== null)
 			foreach($dynamicConversionAttributes as $index => $obj)
 			{
-				$this->client->addParam($kparams, "dynamicConversionAttributes:$index", $obj->toParams());
+				$this->client->addParam($vparams, "dynamicConversionAttributes:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("document_documents", "convert", $kparams);
+		$this->client->queueServiceActionCall("document_documents", "convert", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -286,37 +286,37 @@ class KalturaDocumentsService extends KalturaServiceBase
 
 	function get($entryId, $version = -1)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("document_documents", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("document_documents", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
-	function update($entryId, KalturaDocumentEntry $documentEntry)
+	function update($entryId, VidiunDocumentEntry $documentEntry)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->queueServiceActionCall("document_documents", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->queueServiceActionCall("document_documents", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
 	function delete($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -325,28 +325,28 @@ class KalturaDocumentsService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function listAction(KalturaDocumentEntryFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDocumentEntryFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("document_documents", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("document_documents", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentListResponse");
 		return $resultObject;
 	}
 
 	function upload($fileData)
 	{
-		$kparams = array();
-		$kfiles = array();
-		$this->client->addParam($kfiles, "fileData", $fileData);
-		$this->client->queueServiceActionCall("document_documents", "upload", $kparams, $kfiles);
+		$vparams = array();
+		$vfiles = array();
+		$this->client->addParam($vfiles, "fileData", $fileData);
+		$this->client->queueServiceActionCall("document_documents", "upload", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -357,9 +357,9 @@ class KalturaDocumentsService extends KalturaServiceBase
 
 	function convertPptToSwf($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "convertPptToSwf", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "convertPptToSwf", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -370,56 +370,56 @@ class KalturaDocumentsService extends KalturaServiceBase
 
 	function serve($entryId, $flavorAssetId = null, $forceProxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "forceProxy", $forceProxy);
-		$this->client->queueServiceActionCall('document_documents', 'serve', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "forceProxy", $forceProxy);
+		$this->client->queueServiceActionCall('document_documents', 'serve', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 
 	function serveByFlavorParamsId($entryId, $flavorParamsId = null, $forceProxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "flavorParamsId", $flavorParamsId);
-		$this->client->addParam($kparams, "forceProxy", $forceProxy);
-		$this->client->queueServiceActionCall('document_documents', 'serveByFlavorParamsId', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "flavorParamsId", $flavorParamsId);
+		$this->client->addParam($vparams, "forceProxy", $forceProxy);
+		$this->client->queueServiceActionCall('document_documents', 'serveByFlavorParamsId', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 }
-class KalturaDocumentClientPlugin extends KalturaClientPlugin
+class VidiunDocumentClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaDocumentClientPlugin
+	 * @var VidiunDocumentClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaDocumentsService
+	 * @var VidiunDocumentsService
 	 */
 	public $documents = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->documents = new KalturaDocumentsService($client);
+		$this->documents = new VidiunDocumentsService($client);
 	}
 
 	/**
-	 * @return KalturaDocumentClientPlugin
+	 * @return VidiunDocumentClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaDocumentClientPlugin($client);
+			self::$instance = new VidiunDocumentClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaVirusFoundAction
+class VidiunVirusFoundAction
 {
 	const NONE = 0;
 	const DELETE = 1;
@@ -11,12 +11,12 @@ class KalturaVirusFoundAction
 	const CLEAN_DELETE = 3;
 }
 
-class KalturaVirusScanEngineType
+class VidiunVirusScanEngineType
 {
 	const SYMANTEC_SCAN_ENGINE = "symantecScanEngine.SymantecScanEngine";
 }
 
-class KalturaVirusScanJobResult
+class VidiunVirusScanJobResult
 {
 	const SCAN_ERROR = 1;
 	const FILE_IS_CLEAN = 2;
@@ -24,7 +24,7 @@ class KalturaVirusScanJobResult
 	const FILE_INFECTED = 4;
 }
 
-class KalturaVirusScanProfileOrderBy
+class VidiunVirusScanProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
@@ -32,14 +32,14 @@ class KalturaVirusScanProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
-class KalturaVirusScanProfileStatus
+class VidiunVirusScanProfileStatus
 {
 	const DISABLED = 1;
 	const ENABLED = 2;
 	const DELETED = 3;
 }
 
-abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
+abstract class VidiunVirusScanProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -114,7 +114,7 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanProfileStatus
+	 * @var VidiunVirusScanProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -128,7 +128,7 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanEngineType
+	 * @var VidiunVirusScanEngineType
 	 */
 	public $engineTypeEqual = null;
 
@@ -142,12 +142,12 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 
 }
 
-class KalturaVirusScanProfileFilter extends KalturaVirusScanProfileBaseFilter
+class VidiunVirusScanProfileFilter extends VidiunVirusScanProfileBaseFilter
 {
 
 }
 
-class KalturaVirusScanProfile extends KalturaObjectBase
+class VidiunVirusScanProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -191,40 +191,40 @@ class KalturaVirusScanProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanProfileStatus
+	 * @var VidiunVirusScanProfileStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanEngineType
+	 * @var VidiunVirusScanEngineType
 	 */
 	public $engineType = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaBaseEntryFilter
+	 * @var VidiunBaseEntryFilter
 	 */
 	public $entryFilter;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusFoundAction
+	 * @var VidiunVirusFoundAction
 	 */
 	public $actionIfInfected = null;
 
 
 }
 
-class KalturaVirusScanProfileListResponse extends KalturaObjectBase
+class VidiunVirusScanProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaVirusScanProfile
+	 * @var array of VidiunVirusScanProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -240,7 +240,7 @@ class KalturaVirusScanProfileListResponse extends KalturaObjectBase
 
 }
 
-class KalturaVirusScanJobData extends KalturaJobData
+class VidiunVirusScanJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -259,14 +259,14 @@ class KalturaVirusScanJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanJobResult
+	 * @var VidiunVirusScanJobResult
 	 */
 	public $scanResult = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusFoundAction
+	 * @var VidiunVirusFoundAction
 	 */
 	public $virusFoundAction = null;
 
@@ -274,88 +274,88 @@ class KalturaVirusScanJobData extends KalturaJobData
 }
 
 
-class KalturaVirusScanProfileService extends KalturaServiceBase
+class VidiunVirusScanProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaVirusScanProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunVirusScanProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfileListResponse");
 		return $resultObject;
 	}
 
-	function add(KalturaVirusScanProfile $virusScanProfile)
+	function add(VidiunVirusScanProfile $virusScanProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfile", $virusScanProfile->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfile", $virusScanProfile->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
 	function get($virusScanProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
-	function update($virusScanProfileId, KalturaVirusScanProfile $virusScanProfile)
+	function update($virusScanProfileId, VidiunVirusScanProfile $virusScanProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->addParam($kparams, "virusScanProfile", $virusScanProfile->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->addParam($vparams, "virusScanProfile", $virusScanProfile->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
 	function delete($virusScanProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
 	function scan($flavorAssetId, $virusScanProfileId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "scan", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "scan", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -365,22 +365,22 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	}
 }
 
-class KalturaVirusScanBatchService extends KalturaServiceBase
+class VidiunVirusScanBatchService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function getExclusiveVirusScanJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveVirusScanJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveVirusScanJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveVirusScanJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -389,45 +389,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveVirusScanJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveVirusScanJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveVirusScanJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveVirusScanJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveVirusScanJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveVirusScanJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveVirusScanJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveVirusScanJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveImportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveImportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveImportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveImportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -436,45 +436,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveImportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveImportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveImportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveImportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -483,15 +483,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkUploadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkUploadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneBulkUploadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneBulkUploadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -500,72 +500,72 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkUploadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkUploadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveBulkUploadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveBulkUploadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function addBulkUploadResult(KalturaBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
+	function addBulkUploadResult(VidiunBulkUploadResult $bulkUploadResult, array $pluginDataArray = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadResult", $bulkUploadResult->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadResult", $bulkUploadResult->toParams());
 		if ($pluginDataArray !== null)
 			foreach($pluginDataArray as $index => $obj)
 			{
-				$this->client->addParam($kparams, "pluginDataArray:$index", $obj->toParams());
+				$this->client->addParam($vparams, "pluginDataArray:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "addBulkUploadResult", $kparams);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "addBulkUploadResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function getBulkUploadLastResult($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getBulkUploadLastResult", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getBulkUploadLastResult", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkUploadResult");
+		$this->client->validateObjectType($resultObject, "VidiunBulkUploadResult");
 		return $resultObject;
 	}
 
 	function countBulkUploadEntries($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "countBulkUploadEntries", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "countBulkUploadEntries", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -576,9 +576,9 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 
 	function updateBulkUploadResults($bulkUploadJobId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "bulkUploadJobId", $bulkUploadJobId);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateBulkUploadResults", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "bulkUploadJobId", $bulkUploadJobId);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateBulkUploadResults", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -587,15 +587,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -604,15 +604,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertProfileJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertProfileJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertProfileJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertProfileJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -621,80 +621,80 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job, array $flavorsData = null)
+	function updateExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job, array $flavorsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
 		if ($flavorsData !== null)
 			foreach($flavorsData as $index => $obj)
 			{
-				$this->client->addParam($kparams, "flavorsData:$index", $obj->toParams());
+				$this->client->addParam($vparams, "flavorsData:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertCollectionJob", $kparams);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertCollectionJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertCollectionJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertCollectionJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertCollectionJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertProfileJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertProfileJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertProfileJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertProfileJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveConvertCollectionJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertCollectionJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveConvertCollectionJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveConvertCollectionJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -703,15 +703,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -720,15 +720,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -737,60 +737,60 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function updateExclusiveConvertJobSubType($id, KalturaExclusiveLockKey $lockKey, $subType)
+	function updateExclusiveConvertJobSubType($id, VidiunExclusiveLockKey $lockKey, $subType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "subType", $subType);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertJobSubType", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "subType", $subType);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveConvertJobSubType", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusivePostConvertJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusivePostConvertJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusivePostConvertJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusivePostConvertJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -799,45 +799,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusivePostConvertJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusivePostConvertJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusivePostConvertJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusivePostConvertJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveCaptureThumbJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveCaptureThumbJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveCaptureThumbJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveCaptureThumbJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -846,45 +846,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveCaptureThumbJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveCaptureThumbJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveCaptureThumbJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveCaptureThumbJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveExtractMediaJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveExtractMediaJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveExtractMediaJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveExtractMediaJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -893,58 +893,58 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function addMediaInfo(KalturaMediaInfo $mediaInfo)
+	function addMediaInfo(VidiunMediaInfo $mediaInfo)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "mediaInfo", $mediaInfo->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "addMediaInfo", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "mediaInfo", $mediaInfo->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "addMediaInfo", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaInfo");
+		$this->client->validateObjectType($resultObject, "VidiunMediaInfo");
 		return $resultObject;
 	}
 
-	function freeExclusiveExtractMediaJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveExtractMediaJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveExtractMediaJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveExtractMediaJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageExportJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageExportJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveStorageExportJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveStorageExportJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -953,45 +953,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageExportJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageExportJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveStorageExportJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveStorageExportJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveStorageDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveStorageDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveStorageDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveStorageDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1000,92 +1000,92 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveStorageDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveStorageDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveStorageDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveStorageDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveNotificationJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveNotificationJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveNotificationJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveNotificationJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchGetExclusiveNotificationJobsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunBatchGetExclusiveNotificationJobsResponse");
 		return $resultObject;
 	}
 
-	function updateExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveNotificationJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveNotificationJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveNotificationJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveNotificationJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveMailJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveMailJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveMailJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveMailJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1094,45 +1094,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveMailJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveMailJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveMailJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveMailJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1141,15 +1141,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneBulkDownloadJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneBulkDownloadJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneBulkDownloadJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneBulkDownloadJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1158,45 +1158,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveBulkDownloadJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveBulkDownloadJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveBulkDownloadJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveBulkDownloadJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1205,15 +1205,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionProvideJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionProvideJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneProvisionProvideJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneProvisionProvideJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1222,45 +1222,45 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionProvideJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionProvideJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveProvisionProvideJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveProvisionProvideJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getExclusiveProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1269,15 +1269,15 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDoneProvisionDeleteJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null)
+	function getExclusiveAlmostDoneProvisionDeleteJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDoneProvisionDeleteJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1286,43 +1286,43 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
-	function freeExclusiveProvisionDeleteJob($id, KalturaExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
+	function freeExclusiveProvisionDeleteJob($id, VidiunExclusiveLockKey $lockKey, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveProvisionDeleteJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveProvisionDeleteJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function resetJobExecutionAttempts($id, KalturaExclusiveLockKey $lockKey, $jobType)
+	function resetJobExecutionAttempts($id, VidiunExclusiveLockKey $lockKey, $jobType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "resetJobExecutionAttempts", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "resetJobExecutionAttempts", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1331,27 +1331,27 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function freeExclusiveJob($id, KalturaExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
+	function freeExclusiveJob($id, VidiunExclusiveLockKey $lockKey, $jobType, $resetExecutionAttempts = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->addParam($kparams, "resetExecutionAttempts", $resetExecutionAttempts);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->addParam($vparams, "resetExecutionAttempts", $resetExecutionAttempts);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "freeExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFreeJobResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFreeJobResponse");
 		return $resultObject;
 	}
 
-	function getQueueSize(KalturaWorkerQueueFilter $workerQueueFilter)
+	function getQueueSize(VidiunWorkerQueueFilter $workerQueueFilter)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "workerQueueFilter", $workerQueueFilter->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getQueueSize", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "workerQueueFilter", $workerQueueFilter->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getQueueSize", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1360,16 +1360,16 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveJobs(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveJobs(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveJobs", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1378,16 +1378,16 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function getExclusiveAlmostDone(KalturaExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, KalturaBatchJobFilter $filter = null, $jobType = null)
+	function getExclusiveAlmostDone(VidiunExclusiveLockKey $lockKey, $maxExecutionTime, $numberOfJobs, VidiunBatchJobFilter $filter = null, $jobType = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "maxExecutionTime", $maxExecutionTime);
-		$this->client->addParam($kparams, "numberOfJobs", $numberOfJobs);
+		$vparams = array();
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "maxExecutionTime", $maxExecutionTime);
+		$this->client->addParam($vparams, "numberOfJobs", $numberOfJobs);
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "jobType", $jobType);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDone", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->addParam($vparams, "jobType", $jobType);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "getExclusiveAlmostDone", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1396,25 +1396,25 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 		return $resultObject;
 	}
 
-	function updateExclusiveJob($id, KalturaExclusiveLockKey $lockKey, KalturaBatchJob $job)
+	function updateExclusiveJob($id, VidiunExclusiveLockKey $lockKey, VidiunBatchJob $job)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "lockKey", $lockKey->toParams());
-		$this->client->addParam($kparams, "job", $job->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveJob", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "lockKey", $lockKey->toParams());
+		$this->client->addParam($vparams, "job", $job->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "updateExclusiveJob", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBatchJob");
+		$this->client->validateObjectType($resultObject, "VidiunBatchJob");
 		return $resultObject;
 	}
 
 	function cleanExclusiveJobs()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "cleanExclusiveJobs", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "cleanExclusiveJobs", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1425,10 +1425,10 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 
 	function logConversion($flavorAssetId, $data)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "data", $data);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "logConversion", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "data", $data);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "logConversion", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -1439,54 +1439,54 @@ class KalturaVirusScanBatchService extends KalturaServiceBase
 
 	function checkFileExists($localPath, $size)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "localPath", $localPath);
-		$this->client->addParam($kparams, "size", $size);
-		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "checkFileExists", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "localPath", $localPath);
+		$this->client->addParam($vparams, "size", $size);
+		$this->client->queueServiceActionCall("virusscan_virusscanbatch", "checkFileExists", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaFileExistsResponse");
+		$this->client->validateObjectType($resultObject, "VidiunFileExistsResponse");
 		return $resultObject;
 	}
 }
-class KalturaVirusScanClientPlugin extends KalturaClientPlugin
+class VidiunVirusScanClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaVirusScanClientPlugin
+	 * @var VidiunVirusScanClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaVirusScanProfileService
+	 * @var VidiunVirusScanProfileService
 	 */
 	public $virusScanProfile = null;
 
 	/**
-	 * @var KalturaVirusScanBatchService
+	 * @var VidiunVirusScanBatchService
 	 */
 	public $virusScanBatch = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->virusScanProfile = new KalturaVirusScanProfileService($client);
-		$this->virusScanBatch = new KalturaVirusScanBatchService($client);
+		$this->virusScanProfile = new VidiunVirusScanProfileService($client);
+		$this->virusScanBatch = new VidiunVirusScanBatchService($client);
 	}
 
 	/**
-	 * @return KalturaVirusScanClientPlugin
+	 * @return VidiunVirusScanClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaVirusScanClientPlugin($client);
+			self::$instance = new VidiunVirusScanClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

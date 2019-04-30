@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaInternalToolsSession extends KalturaObjectBase
+class VidiunInternalToolsSession extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -29,7 +29,7 @@ class KalturaInternalToolsSession extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaSessionType
+	 * @var VidiunSessionType
 	 */
 	public $type = null;
 
@@ -65,39 +65,39 @@ class KalturaInternalToolsSession extends KalturaObjectBase
 }
 
 
-class KalturaKalturaInternalToolsService extends KalturaServiceBase
+class VidiunVidiunInternalToolsService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 }
 
-class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
+class VidiunVidiunInternalToolsSystemHelperService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	function fromSecureString($str)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "str", $str);
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "fromSecureString", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "str", $str);
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "fromSecureString", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaInternalToolsSession");
+		$this->client->validateObjectType($resultObject, "VidiunInternalToolsSession");
 		return $resultObject;
 	}
 
 	function iptocountry($remote_addr)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "remote_addr", $remote_addr);
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "iptocountry", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "remote_addr", $remote_addr);
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "iptocountry", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -108,8 +108,8 @@ class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
 
 	function getRemoteAddress()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "getRemoteAddress", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "getRemoteAddress", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
@@ -118,48 +118,48 @@ class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
-class KalturaKalturaInternalToolsClientPlugin extends KalturaClientPlugin
+class VidiunVidiunInternalToolsClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaKalturaInternalToolsClientPlugin
+	 * @var VidiunVidiunInternalToolsClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaKalturaInternalToolsService
+	 * @var VidiunVidiunInternalToolsService
 	 */
-	public $KalturaInternalTools = null;
+	public $VidiunInternalTools = null;
 
 	/**
-	 * @var KalturaKalturaInternalToolsSystemHelperService
+	 * @var VidiunVidiunInternalToolsSystemHelperService
 	 */
-	public $KalturaInternalToolsSystemHelper = null;
+	public $VidiunInternalToolsSystemHelper = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->KalturaInternalTools = new KalturaKalturaInternalToolsService($client);
-		$this->KalturaInternalToolsSystemHelper = new KalturaKalturaInternalToolsSystemHelperService($client);
+		$this->VidiunInternalTools = new VidiunVidiunInternalToolsService($client);
+		$this->VidiunInternalToolsSystemHelper = new VidiunVidiunInternalToolsSystemHelperService($client);
 	}
 
 	/**
-	 * @return KalturaKalturaInternalToolsClientPlugin
+	 * @return VidiunVidiunInternalToolsClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaKalturaInternalToolsClientPlugin($client);
+			self::$instance = new VidiunVidiunInternalToolsClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{
 		$services = array(
-			'KalturaInternalTools' => $this->KalturaInternalTools,
-			'KalturaInternalToolsSystemHelper' => $this->KalturaInternalToolsSystemHelper,
+			'VidiunInternalTools' => $this->VidiunInternalTools,
+			'VidiunInternalToolsSystemHelper' => $this->VidiunInternalToolsSystemHelper,
 		);
 		return $services;
 	}
@@ -169,7 +169,7 @@ class KalturaKalturaInternalToolsClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'KalturaInternalTools';
+		return 'VidiunInternalTools';
 	}
 }
 

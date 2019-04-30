@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
-class KalturaShortLinkOrderBy
+class VidiunShortLinkOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
@@ -13,14 +13,14 @@ class KalturaShortLinkOrderBy
 	const EXPIRES_AT_DESC = "-expiresAt";
 }
 
-class KalturaShortLinkStatus
+class VidiunShortLinkStatus
 {
 	const DISABLED = 1;
 	const ENABLED = 2;
 	const DELETED = 3;
 }
 
-abstract class KalturaShortLinkBaseFilter extends KalturaFilter
+abstract class VidiunShortLinkBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -123,7 +123,7 @@ abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaShortLinkStatus
+	 * @var VidiunShortLinkStatus
 	 */
 	public $statusEqual = null;
 
@@ -137,12 +137,12 @@ abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 
 }
 
-class KalturaShortLinkFilter extends KalturaShortLinkBaseFilter
+class VidiunShortLinkFilter extends VidiunShortLinkBaseFilter
 {
 
 }
 
-class KalturaShortLink extends KalturaObjectBase
+class VidiunShortLink extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -214,19 +214,19 @@ class KalturaShortLink extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaShortLinkStatus
+	 * @var VidiunShortLinkStatus
 	 */
 	public $status = null;
 
 
 }
 
-class KalturaShortLinkListResponse extends KalturaObjectBase
+class VidiunShortLinkListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaShortLink
+	 * @var array of VidiunShortLink
 	 * @readonly
 	 */
 	public $objects;
@@ -243,122 +243,122 @@ class KalturaShortLinkListResponse extends KalturaObjectBase
 }
 
 
-class KalturaShortLinkService extends KalturaServiceBase
+class VidiunShortLinkService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
-	function listAction(KalturaShortLinkFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunShortLinkFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLinkListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunShortLinkListResponse");
 		return $resultObject;
 	}
 
-	function add(KalturaShortLink $shortLink)
+	function add(VidiunShortLink $shortLink)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "shortLink", $shortLink->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "shortLink", $shortLink->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("shortlink_shortlink", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("shortlink_shortlink", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
-	function update($id, KalturaShortLink $shortLink)
+	function update($id, VidiunShortLink $shortLink)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "shortLink", $shortLink->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "shortLink", $shortLink->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("shortlink_shortlink", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("shortlink_shortlink", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return null;
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
 	function gotoAction($id, $proxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "proxy", $proxy);
-		$this->client->queueServiceActionCall('shortlink_shortlink', 'goto', $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "proxy", $proxy);
+		$this->client->queueServiceActionCall('shortlink_shortlink', 'goto', $vparams);
 		$resultObject = $this->client->getServeUrl();
 		return $resultObject;
 	}
 }
-class KalturaShortLinkClientPlugin extends KalturaClientPlugin
+class VidiunShortLinkClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaShortLinkClientPlugin
+	 * @var VidiunShortLinkClientPlugin
 	 */
 	protected static $instance;
 
 	/**
-	 * @var KalturaShortLinkService
+	 * @var VidiunShortLinkService
 	 */
 	public $shortLink = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->shortLink = new KalturaShortLinkService($client);
+		$this->shortLink = new VidiunShortLinkService($client);
 	}
 
 	/**
-	 * @return KalturaShortLinkClientPlugin
+	 * @return VidiunShortLinkClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
 		if(!self::$instance)
-			self::$instance = new KalturaShortLinkClientPlugin($client);
+			self::$instance = new VidiunShortLinkClientPlugin($client);
 		return self::$instance;
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

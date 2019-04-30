@@ -11,11 +11,11 @@ clipApp.log = function(msg) {
 
 // Set default vars
 clipApp.vars = {
-	host: "www.kaltura.com",
+	host: "www.vidiun.com",
 	redirect_save: false,
-	redirect_url: "http://www.kaltura.com/",
+	redirect_url: "http://www.vidiun.com/",
 	overwrite_entry: false,
-	seekFromKClip: false,
+	seekFromVClip: false,
 	debug: false
 };
 
@@ -24,31 +24,31 @@ clipApp.init = function( options ) {
 };
 
 var jsCallbackReady = function( videoId ) {
-	clipApp.kdp = $("#" + videoId ).get(0);
+	clipApp.vdp = $("#" + videoId ).get(0);
 	clipApp.player.firstLoad = true;
-	//clipApp.kdp.addJsListener("mediaReady", "clipApp.player.doFirstPlay");
-	clipApp.kdp.addJsListener("playerPlayed", "clipApp.player.playerPlaying");
-	clipApp.kdp.addJsListener("playerPaused", "clipApp.player.playerPaused");
-	clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
-	clipApp.kdp.addJsListener("durationChange", "clipApp.player.durationChange");
+	//clipApp.vdp.addJsListener("mediaReady", "clipApp.player.doFirstPlay");
+	clipApp.vdp.addJsListener("playerPlayed", "clipApp.player.playerPlaying");
+	clipApp.vdp.addJsListener("playerPaused", "clipApp.player.playerPaused");
+	clipApp.vdp.addJsListener("doSeek", "clipApp.onSeek");
+	clipApp.vdp.addJsListener("durationChange", "clipApp.player.durationChange");
 
 };
 
 var clipperReady = function() {
-	clipApp.kClip = $("#clipper").get(0);
-	clipApp.kClip.addJsListener("clipStartChanged", "clipApp.updateStartTime");
-	clipApp.kClip.addJsListener("clipEndChanged", "clipApp.updateEndTime");
-	clipApp.kClip.addJsListener("entryReady", "clipApp.enableAddClip");
-	clipApp.kClip.addJsListener("clipAdded", "clipApp.clipAdded");
-	clipApp.kClip.addJsListener("clipperError", "clipApp.showError");
-	clipApp.kClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
+	clipApp.vClip = $("#clipper").get(0);
+	clipApp.vClip.addJsListener("clipStartChanged", "clipApp.updateStartTime");
+	clipApp.vClip.addJsListener("clipEndChanged", "clipApp.updateEndTime");
+	clipApp.vClip.addJsListener("entryReady", "clipApp.enableAddClip");
+	clipApp.vClip.addJsListener("clipAdded", "clipApp.clipAdded");
+	clipApp.vClip.addJsListener("clipperError", "clipApp.showError");
+	clipApp.vClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
 	//if we are during initialization process we will add the handler after
 	if ( !clipApp.player.firstLoad ) {
-		clipApp.kClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead");
+		clipApp.vClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead");
 	}
-	//in case kClip was loaded after kdp called "durationChange"
+	//in case vClip was loaded after vdp called "durationChange"
 	if ( clipApp.vars.entry && clipApp.vars.entry.msDuration ) {
-		clipApp.kClip.setDuration(clipApp.vars.entry.msDuration);
+		clipApp.vClip.setDuration(clipApp.vars.entry.msDuration);
 	}
 };
 
@@ -66,50 +66,50 @@ clipApp.player = {
 	/*doFirstPlay: function() {
 		clipApp.log('doFirstPlay');
 		clipApp.player.firstLoad = true;
-		clipApp.kdp.sendNotification("doPlay");
+		clipApp.vdp.sendNotification("doPlay");
 	},*/
 
 	playerPlaying: function() {
 		clipApp.log('clipApp.player.playerPlaying');
 		if( clipApp.player.firstLoad ) {
-			clipApp.log('pauseKdp');
+			clipApp.log('pauseVdp');
 
 			setTimeout( function() {
 				clipApp.player.firstLoad = false;
-				clipApp.kdp.sendNotification("doPause");
+				clipApp.vdp.sendNotification("doPause");
 				//live entry playback starts from the end - seek back to beginning
 				if ( clipApp.vars.entry.mediaType == '201' ) {
-					clipApp.kdp.sendNotification("doSeek", 0);
+					clipApp.vdp.sendNotification("doSeek", 0);
 				}
-				clipApp.kClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead");
+				clipApp.vClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead");
 			}, 50);
 		}
 		clipApp.vars.removeBlackScreen = true;
 		clipApp.vars.playerPlaying = true;
 
-		clipApp.kClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
-		clipApp.kdp.addJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
+		clipApp.vClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+		clipApp.vdp.addJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
 	},
 
 	playerPaused: function() {
 		clipApp.vars.playerPlaying = false;
 		setTimeout( function() {
-			clipApp.kClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
-			clipApp.kdp.removeJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
+			clipApp.vClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+			clipApp.vdp.removeJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
 		}, 1);
 	},
 
 	updatePlayhead: function(val) {
 		clipApp.clipper.dragging = false;
 		if( clipApp.clipper.dragging === false ) {
-			clipApp.kClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+			clipApp.vClip.addJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
 		}
 
 		val = Math.floor( val / 1000 );
-		clipApp.vars.seekFromKClip = true;
-		clipApp.kdp.sendNotification("doSeek", val);
+		clipApp.vars.seekFromVClip = true;
+		clipApp.vdp.sendNotification("doSeek", val);
 		setTimeout(function() {
-			clipApp.kdp.sendNotification("doPause");
+			clipApp.vdp.sendNotification("doPause");
 		}, 250);
 	},
 
@@ -117,7 +117,7 @@ clipApp.player = {
 		var newDuration =  data.newValue*1000;
 		if ( newDuration != clipApp.vars.entry.msDuration ) {
 			clipApp.vars.entry.msDuration = newDuration;
-			clipApp.kClip.setDuration(data.newValue*1000);
+			clipApp.vClip.setDuration(data.newValue*1000);
 		}
 
 	}
@@ -128,20 +128,20 @@ clipApp.clipper = {
 	dragging: false,
 	addClip: function( start, end ) {
 		var clip_length = (end) ? end : (clipApp.getMsDuration() / 10); // Get 10 percent of video duration
-		var clip_offset = (start) ? start : clipApp.kClip.getPlayheadLocation();
+		var clip_offset = (start) ? start : clipApp.vClip.getPlayheadLocation();
 		clip_length = Math.round(clip_length);
 		clip_offset = Math.round(clip_offset);
-		clipApp.kClip.addClipAt(clip_offset, clip_length);
+		clipApp.vClip.addClipAt(clip_offset, clip_length);
 		clipApp.log('addClipAt (Length: ' + clip_length + ')');
-		clipApp.kdp.sendNotification("doPause");
+		clipApp.vdp.sendNotification("doPause");
 	},
 
 	updatePlayhead: function(val) {
-			clipApp.kClip.scrollToPoint(val * 1000);
+			clipApp.vClip.scrollToPoint(val * 1000);
 	},
 	dragStarted: function() {
 		clipApp.clipper.dragging = true;
-		clipApp.kClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+		clipApp.vClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
 	}
 };
 
@@ -245,8 +245,8 @@ clipApp.setStartTime = function( val ) {
 		duration: $("#endTime").timeStepper( 'getValue' ) - startTime
 	};
 
-	clipApp.kClip.updateClipAttributes( clipAttributes );
-	clipApp.kdp.sendNotification("doPause");
+	clipApp.vClip.updateClipAttributes( clipAttributes );
+	clipApp.vdp.sendNotification("doPause");
 };
 
 clipApp.setEndTime = function( val ) {
@@ -261,8 +261,8 @@ clipApp.setEndTime = function( val ) {
 		duration: endTime - $("#startTime").timeStepper( 'getValue' )
 	};
 
-	clipApp.kClip.updateClipAttributes( clipAttributes );
-	clipApp.kdp.sendNotification("doPause");
+	clipApp.vClip.updateClipAttributes( clipAttributes );
+	clipApp.vdp.sendNotification("doPause");
 };
 
 clipApp.activateButtons = function() {
@@ -275,11 +275,11 @@ clipApp.activateButtons = function() {
 	$("#preview").click( function() { clipApp.doPreview(); });
 
 	$("#setStartTime").click( function() {
-		clipApp.setStartTime( clipApp.kClip.getPlayheadLocation() );
+		clipApp.setStartTime( clipApp.vClip.getPlayheadLocation() );
 	});
 
 	$("#setEndTime").click( function() {
-		clipApp.setEndTime( clipApp.kClip.getPlayheadLocation() );
+		clipApp.setEndTime( clipApp.vClip.getPlayheadLocation() );
 	});
 
 	$("#delete").click( function() {
@@ -311,27 +311,27 @@ clipApp.doPreview = function() {
 
 	clipApp.vars.removeBlackScreen = false;
 
-	clipApp.kdp.removeJsListener("doSeek", "clipApp.onSeek");
+	clipApp.vdp.removeJsListener("doSeek", "clipApp.onSeek");
 	//will re-listen to seek events after this mediaPlayFrom seek has finished
-	clipApp.kdp.addJsListener("playerSeekEnd", "clipApp.onPlayerSeekEnd");
-	clipApp.kClip.updateZoomIndex(0);
+	clipApp.vdp.addJsListener("playerSeekEnd", "clipApp.onPlayerSeekEnd");
+	clipApp.vClip.updateZoomIndex(0);
 
 	if( clipApp.vars.playerPlaying ){
-		clipApp.kdp.sendNotification("doPause");
+		clipApp.vdp.sendNotification("doPause");
 	}
-	clipApp.kdp.setKDPAttribute("blackScreen", "visible", "true" );
-	clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayFrom", startTime );
-	clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayTo", endTime );
-	// work around for kdp didn't play at first doPlay
-	clipApp.kdp.sendNotification("doPlay");
-	clipApp.kdp.sendNotification("doPlay");
+	clipApp.vdp.setVDPAttribute("blackScreen", "visible", "true" );
+	clipApp.vdp.setVDPAttribute("mediaProxy", "mediaPlayFrom", startTime );
+	clipApp.vdp.setVDPAttribute("mediaProxy", "mediaPlayTo", endTime );
+	// work around for vdp didn't play at first doPlay
+	clipApp.vdp.sendNotification("doPlay");
+	clipApp.vdp.sendNotification("doPlay");
 
 
 };
 
 clipApp.onPlayerSeekEnd = function() {
 	setTimeout( function() {
-		clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
+		clipApp.vdp.addJsListener("doSeek", "clipApp.onSeek");
 	}, 1);
 
 }
@@ -339,14 +339,14 @@ clipApp.onPlayerSeekEnd = function() {
 clipApp.onSeek = function(val) {
 	if( clipApp.vars.removeBlackScreen ) {
 		clipApp.log('onSeek :: Remove black screen');
-		clipApp.kdp.setKDPAttribute("blackScreen", "visible", "false" );
+		clipApp.vdp.setVDPAttribute("blackScreen", "visible", "false" );
 	}
 
-	if( clipApp.vars.seekFromKClip === false ) {
+	if( clipApp.vars.seekFromVClip === false ) {
 
 		clipApp.clipper.updatePlayhead(val);
 	} else {
-		clipApp.vars.seekFromKClip = false;
+		clipApp.vars.seekFromVClip = false;
 	}
 };
 
@@ -364,9 +364,9 @@ clipApp.showError = function(error) {
 clipApp.getEmbedCode = function(entry_id) {
 
 	var unique_id = clipApp.getUniqueId();
-	var entry_url = 'http://' + clipApp.vars.host + '/kwidget/wid/_' + clipApp.vars.partner_id + '/uiconf_id/' + clipApp.vars.kdp_uiconf_id + '/entry_id/' + entry_id;
+	var entry_url = 'http://' + clipApp.vars.host + '/vwidget/wid/_' + clipApp.vars.partner_id + '/uiconf_id/' + clipApp.vars.vdp_uiconf_id + '/entry_id/' + entry_id;
 
-	var embed_code = '<object id="kaltura_player_' + unique_id + '" name="kaltura_player_' + unique_id + '" type="application/x-shockwave-flash" allowFullScreen="true"' +
+	var embed_code = '<object id="vidiun_player_' + unique_id + '" name="vidiun_player_' + unique_id + '" type="application/x-shockwave-flash" allowFullScreen="true"' +
 				' allowNetworking="all" allowScriptAccess="always" height="330" width="400" bgcolor="#000000"' +
 				' resource="' + entry_url + '" data="' + entry_url + '"><param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" />' +
 				' <param name="allowScriptAccess" value="always" /><param name="bgcolor" value="#000000" /><param name="movie" value="' + entry_url + '" /></object>';
@@ -432,8 +432,8 @@ clipApp.doSave = function() {
 		var queryString = $.param( {
 			'config': clipApp.vars.config,
 			'partnerId': clipApp.vars.partner_id,
-			'kclipUiconf': clipApp.vars.kclip_uiconf_id,
-			'kdpUiconf': clipApp.vars.kdp_uiconf_id,
+			'vclipUiconf': clipApp.vars.vclip_uiconf_id,
+			'vdpUiconf': clipApp.vars.vdp_uiconf_id,
 			'mode': ((clipApp.vars.overwrite_entry) ? 'trim' : 'clip')
 		} );
 		saveUrl += '?' + queryString;
@@ -460,11 +460,11 @@ clipApp.doSave = function() {
 };
 
 clipApp.deleteClip = function() {
-	// Stop the KDP
-	clipApp.kdp.sendNotification("doPause");
+	// Stop the VDP
+	clipApp.vdp.sendNotification("doPause");
 
 	// Remove clip from clipper
-	clipApp.kClip.deleteSelected();
+	clipApp.vClip.deleteSelected();
 
 	// Reset fields
 	$("#entry_title").val( clipApp.vars.entry.name );
